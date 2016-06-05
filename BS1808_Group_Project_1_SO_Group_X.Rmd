@@ -31,8 +31,8 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(knitr)
-library(broom)
 library(readr)
+library(purrr)
 
 # Set up theme object for prettier plots
 theme_jim <-  theme(legend.position = "bottom",
@@ -72,5 +72,32 @@ forecasts <- read_csv("./data/exhibit10.csv")
 
 # Transform the names for easier typying later
 names(forecasts) <- gsub(" ", "_", names(forecasts)) %>% tolower()
+
+# Rename standard_deviation_(x2) for ease
+forecasts <- forecasts %>% mutate(sd2 = `standard_deviation_(x2)`) %>% 
+                select(-`standard_deviation_(x2)`)
 ```
+
+In order to perform the analyses for optimal order quantity, random samples of demand for each product were required. Given Obermeyer's assumption that the demand is normally distributed, this is relatively straightforward.
+
+```{r gen_samples}
+# Set number of samples required
+samples <- 1000
+
+# Set seed for reproducibility
+set.seed(19891110)
+
+# Create function for generating samples
+gen_samples <- function(samples, avg, sd) {
+    rnorm(samples, avg, sd)
+}
+
+# Create samples
+forecasts <- forecasts %>% 
+    mutate(dist = pmap(list(samples, average, sd2), gen_samples))
+```
+
+# Question One
+
+
 
