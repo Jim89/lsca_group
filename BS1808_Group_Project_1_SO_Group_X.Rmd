@@ -14,29 +14,28 @@ output:
 
 <br>
 <br>
-<p style="border:1.5px; border-style:solid; border-color:#000000; padding: 1em;">The `R` code used to perform this analysis can be viewed in this report using the _Code_ buttons to toggle code viewing. This `HTML` report is best viewed using a modern web browser such as Mozilla Firefox or Google Chrome. It is also available on the [online repository](https://github.com/Jim89/lsca_group). Printing is possible but will not produce an optimal reading experience.</p>
+<p style="border:1.5px; border-style:solid; border-color:#000000; padding: 1em;">The Excel sheets used to perform this analysis has been attached to the submission of this report. This `HTML` report is best viewed using a modern web browser such as Mozilla Firefox or Google Chrome. It is also available on the [online repository](https://github.com/Jim89/lsca_group). Printing is possible but will not produce an optimal reading experience.</p>
 
 # Introduction
 
 ## Project overview
 
-TODO
+In this project we have analysed data from _Sport Obermeyer_, a global skiwear company. We have used forecasts of demand for a range of Obermeyer's products in order to determine how many of each style to order. We have considered ordering policies based on ordering from both Hong Kong and China, and have developed a measure of risk in each case. Finally, we have considered operational changes that Obermeyer may wish to consider making, and made proposals for their short and long term sourcing strategies.  
 
 ```{r prep, echo = TRUE, message=FALSE}
 # Set default knitr options
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.align = "center")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center")
 
 # Load packages
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(knitr)
-library(readr)
 library(purrr)
 library(readxl)
 
 # Set up theme object for prettier plots
-theme_jim <-  theme(legend.position = "bottom",
+theme_jim <-  theme(legend.position = "none",
     axis.text.y = element_text(size = 12, colour = "black"),
     axis.text.x = element_text(size = 12, colour = "black"),
     legend.text = element_text(size = 12),
@@ -63,60 +62,334 @@ toproper <- function(x) {
 }
 ```
 
-# TODO
+# Simulating demand
 
-The data were read in to `R`.
+Each of the 10 styles of Parka under consideration for production had had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a stardard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
 
-```{r get_data}
-# Read the data
-forecasts <- read_csv("./data/exhibit10.csv")
+```{r show_raw}
+# Get raw demand data
+raw <- read_excel("./jim/optim.xlsx", sheet = "Raw")
 
-# Transform the names for easier typying later
-names(forecasts) <- gsub(" ", "_", names(forecasts)) %>% tolower()
-
-# Rename standard_deviation_(x2) for ease
-forecasts <- forecasts %>% mutate(sd2 = `standard_deviation_(x2)`) %>% 
-                select(-`standard_deviation_(x2)`)
+raw %>% 
+    select(1, 3:11) %>% 
+    arrange(Style) %>% 
+    kable(col.names = c("Style", "Laura", "Carolyn", "Greg", "Wendy", "Tom", "Wally", "Mean", "SD", "SD x2"),
+          caption = "Table One: Demand forecasts for each style",
+          format.args = list(big.mark = ","))
 ```
 
-In order to perform the analyses for optimal order quantity, random samples of demand for each product were required. Given Obermeyer's assumption that the demand is normally distributed, this is relatively straightforward.
+Using these values we generated 1000 estimates of demand for each style from a normal distribution with a mean and standard deviation as described above. The distributions of these 1000 estimates for each parka are displayed in figure one.
 
-```{r gen_samples}
-# Set number of samples required
-samples <- 1000
-
-# Set seed for reproducibility
-set.seed(19891110)
-
-# Create function for generating samples
-gen_samples <- function(samples, avg, sd) {
-    rnorm(samples, avg, sd)
-}
-
-# Create samples
-forecasts <- forecasts %>% 
-    mutate(dist = pmap(list(samples, average, sd2), gen_samples))
-
-# Set up demand matrix
-demand <- do.call(rbind, forecasts$dist)
-```
-
-# Question One
-
-```{r out.height = 1000, out.width=800}
+```{r plot_demand, out.height = 1000, out.width=800, fig.cap="Figure 1: Demand estimate distribution for each parka style."}
+# Get sampled demand data
 demand <- read_excel("./jim/optim.xlsx", sheet = "Demand")
 
+# Create plot
 demand %>% 
     select(-3, -4) %>% 
     gather(sample, demand, -Style, -Average) %>% 
-    ggplot(aes(x = demand, fill = Style)) +
-    geom_histogram(colour = "white") +
-    facet_grid(Style ~ .) +
-    scale_x_continuous(labels = scales::comma,
-                       limits = c(-4000, 10000)) +
-    scale_fill_brewer(palette = "Set3") +
-    theme_jim
-
+    ggplot(aes(x = Style, y = demand, fill = Style)) +
+    geom_violin() +
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_brewer(palette = "Paired") +
+    ylab("Demand (units)") +
+    theme_jim +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.65))
 ```
 
+We then used these demand data in a Monte-Carlo analysis to decide on how much of each style to order.
 
+```{r get_results}
+quant <- read_excel("./jim/optim.xlsx", sheet = "OrderQuantities")
+profits <- read_excel("./jim/optim.xlsx", sheet = "Profit")
+```
+
+# Ordering with no minimum
+
+Initially, we considered a situation in which there were no minimum order requirements. That is, Obermeyer could order any amount of each style that they wished. However, from the 10 styles they had to order at least 10,000 in aggregate. We ignored price and production cost differences across the styles. 
+
+In order to do so, we defined a formula that provided an expectation of the profit for a given quantity of each style:
+
+\begin{equation}
+Profit (\pi_q) = \sum_{j=1}^{10}\bigg[\frac{1}{n} \sum_{i=1}^{n} \Big[p.d_{ij} + s.\max(Q_j - d_{ij}, 0) - c.\max(Q_j, d_{ij})\Big]\bigg]
+\end{equation}
+
+Where:
+
+* $Q_j$ is the quantity of style $j$ to produce;
+* $p$ is the sale price;
+* $s$ is the outlet/markdown price;
+* $c$ is the cost of production; and 
+* $d_{ij}$ is the $i$^th^ demand value for style $j$.
+
+We note that this is not the standard formula for profit when determining optimal order quantity. This is because Obermeyer only have to produce 10,000 units now and can produce the rest later. Therefore sales revenue is a function of the actual demand realised and not dependent on the current order quantity. However, the cost of production may change if more/less of each style is produced now relative the the actual demand realised. Hence the first and third terms in the inner summation differ slightly from the standard formula.
+
+Having defined this function, we then used the `Excel` solver to find the optimum order quantity for each style, $Q_j^*$ via the following optimsation program:
+
+\begin{equation} \begin{split}
+\max_{Q} \mathbb{E} (\pi_q) \\
+\text{s.t.} \\
+\sum_{j=1}^{10} Q_j \geq 10000 \\
+Q_j \geq 0
+\end{split}
+\end{equation}
+
+## No minimum order results
+
+The resulting solution from the `Excel` solver, including both order quantity and expected profit for each style is displayed in table 2. 
+
+```{r show_q1}
+quant %>% 
+    select(1, 2) %>% 
+    left_join(profits, by = c("style" = "style")) %>% 
+    select(1, 2, 3) %>% 
+    kable(col.names = c("Style", "Order Quantity", "Expected Profit ($)"),
+          caption = "Table 2: Order quanties and expected profits for each style with no minimum order requirements",
+          format.args = list(big.mark = ","))
+```
+
+Under this scheme, total profit was expected to be `r scales::dollar(sum(profits$q1))`, ordering a total of `r scales::comma(sum(quant$q1))` units.
+
+# Order from Hong Kong
+
+In order to refine the problem we then considered the situation in which there _were_ minimum order requirements. When ordering from Hong Kong there was a minimum order requirement of 600 units. This substantially changed the profit function and resulting optimisation problem.
+
+## Define scenarios
+
+When considering total profit from the order quantity, four scenarious had to be considered:
+
+1. The true demand realisation was _less_ than the initial order quantity, $Q_j$;
+2. The true demand realisation was greater than the initial order quantity but below a threshold (based on the mimimum order requirement) that would trigger making a second order for that style at a later date;
+3. The true demand realisation was greater than the initial order quantity plus the threshold value that would trigger making a second order for that style at a later date; and
+4. The true demand realisation was greater than the initial order quantity plus the minimum order quantity.
+
+## Define scenario profit outcomes
+
+In each of the four scenarious, the profit formula would change slightly:
+
+1. In the first scenario, Obermeyer would sell only the true demand realised, there would be an overstocking cost (based on the difference between the order quantity and the true demand), and the production cost would be dependent only on the initial order quantity;
+2. In the second scenario, Obermeyer would sell the intial order quantity, there would be no overstocking cost and the production cost would be dependent only on the initial order quantity;
+3. In the third scenario, Obermeyer would see the true demand realised, there would be an overstocking cost (based on the difference in the initial order quantity plus the minimum order quantity less the true demand), and the production cost would be dependent on the intial order quantity plus the minimum order quantity; and
+4. In the fourth scenario, Obermeyer would sell the true demand realised, there would be no overstocking cost, and the production cost would be dependent only on the true demand realisation.
+
+## Define scenario profit functions
+
+In order to implement these four scenarious in the overall profit calculation, we defined four separate profit functions, one for each scenario (labelled $P_1$ to $P_4$):
+
+\begin{equation} 
+P_1 = p.d_{ij} + s.\max(Q_j - d_{ij}, 0) - c.Q_j
+\end{equation}
+
+\begin{equation}
+P_2 = p.Q_j - c.Q_j
+\end{equation}
+
+\begin{equation}
+P_3 = p.d_{ij} + s.\max(Q_j + q_{min} - d_{ij}, 0) - c.(Q_j + q_{min})
+\end{equation}
+
+\begin{equation}
+P_4 = p.d_{ij} - c. d_{ij}
+\end{equation}
+
+Where $q_{min}$ is the minimum order quantity.
+
+## Define scenario indicator functions
+
+We then implemented four _indicator_ functions ($I_1$ to $I_4$) that could be used in the overall profit function to "switch" the four individual profit functions on/off depending on the comparison between the order quantity and the realised demand:
+
+\begin{equation} 
+I_1 = \dfrac{\max(Q_j - d_{ij}, 0)}{Q_j - d_{ij}}
+\end{equation}
+
+\begin{equation} 
+I_2 = \dfrac{\max((Q_j + \frac{q_{min}(c-s)}{(p-s)}) - d_{ij}, 0)}{(Q_j + \frac{q_{min}(c-s)}{(p-s)}) - d_{ij}}
+\end{equation}
+
+\begin{equation} 
+I_3 = \dfrac{\max((Q_j + q_{min}) - d_{ij}, 0)}{(Q_j - q_{min}) - d_{ij}}
+\end{equation}
+
+\begin{equation} 
+I_4 = 1 - I_3
+\end{equation}
+
+In these equations $\frac{q_{min}(c-s)}{(p-s)}$ defines the threshold at which a new order will be placed if the realised demand exceeds the initial quantity ordered.
+
+## Define overall profit function
+
+Using the individual profit functions in conjunction with the indicator functions, we were then able to define an _overall_ profit function for this scenario:
+
+\begin{equation}
+Profit (\pi_q) = \sum_{j=1}^{10}\bigg[\frac{1}{n} \sum_{i=1}^{n} \Big[I_1.P_1 + (I_2 - I_1).P_2 + (I_3 - I_2).P_3 + I_4.P_4\Big]\bigg]
+\end{equation}
+
+We then translated this into a new optimsation problem that incorporated the minimum order requirements of producing in Hong Kong:
+
+\begin{equation} \begin{split}
+\max_{Q_j, z_j} \mathbb{E} (\pi_q) \\
+\text{s.t.} \\
+\sum_{j=1}^{10} Q_j \geq 10000 \\
+Q_j \geq 0 \\
+Q_j \geq q_{min}.z_j \\
+Q_j \leq M.z_j \\
+z_j \in \{0, 1\}
+\end{split}
+\end{equation}
+
+Where $z_j$ is a binary variable indicating if style $j$ will be produced (which enables the minimum order quantites to be modelled).
+
+## Hong Kong order results
+
+The resulting solution from the `Excel` solver, including both order quantity and expected profit for each style is displayed in table 3. 
+
+```{r show_q2}
+quant %>% 
+    select(1, 3) %>% 
+    left_join(profits, by = c("style" = "style")) %>% 
+    select(1, 2, 4) %>% 
+    kable(col.names = c("Style", "Order Quantity", "Expected Profit ($)"),
+          caption = "Table 3: Order quanties and expected profits for each style with Hong Kong minimum order requirements (600 units)",
+          format.args = list(big.mark = ","),
+          digits = 0)
+```
+
+Under this scheme, total profit was expected to be `r scales::dollar(sum(profits$q2))`, ordering a total of `r scales::comma(sum(quant$q2))` units.
+
+## Ordering policy risk
+
+Having determined the optimal order quantities for each style, we then quantified the risk associated with this ordering policy. We decided that the main risk was from overstocking - ordering an initial quantity higher than the true realisation of demand (as this would incur write downs and wasted production costs). Understocking on the initial order was less of a risk, as more could be produced later in the second order.
+
+We therefore calculated, for each style's initial order quantity, the proportion of overstocking events based on the demand distributions generated from Obermeyer's forecasts. These proportions are displayed in table 4.
+
+```{r overstock_risk_hk}
+overstock_hk <- demand %>% 
+    select(-2, -3, -4) %>% 
+    gather(sim, value, -Style) %>% 
+    left_join(quant %>% select(style, q2), by = c("Style" = "style")) %>% 
+    mutate(overstock = q2 > value) 
+
+overstock_hk %>% 
+    group_by(Style) %>% 
+    summarise(quantity = mean(q2),
+              prop_overstock = mean(overstock)) %>% 
+    mutate(prop_overstock = ifelse(quantity == 0, 0, prop_overstock),
+           prop_overstock = 100*(prop_overstock)) %>% 
+    arrange(Style) %>% 
+    kable(col.names = c("Style", "Order Quantity", "Overstock Likelihood (%)"),
+          caption = "Table 4: Overstocking likelihood for each style when ordering from Hong Kong.",
+          digits = 0)
+```
+
+The overall (average) risk of overstocking was calculated to be `r scales::percent(mean(overstock_hk$overstock))`. 
+
+In order to quantity this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily be caused by overstocking on the intial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
+
+```{r hk_profits}
+hk_profits <- read_excel("./jim/optim.xlsx", sheet = "HKProfits") %>% gather(sim, value, -Style)
+
+profits %>% 
+    select(style, q2) %>% 
+    left_join(hk_profits %>% group_by(Style) %>% summarise(sd = sd(value)), by = c("style" = "Style")) %>% 
+    arrange(style) %>% 
+    kable(col.names = c("Style", "Profit ($)", "Standard Deviation"),
+          digits = 2,
+          caption = "Table 5: Mean and standard deviation of profit expectation per style")
+```
+
+```{r show_hk_profit, out.height = 1000, out.width=800, fig.cap="Figure 2: Profit estimates for each parka style based on determined order quantites in Hong Kong."}
+hk_profits %>% 
+    ggplot(aes(x = Style, y = value, fill = Style)) +
+    geom_hline(yintercept = 0, colour = "grey") +
+    geom_violin() +
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_brewer(palette = "Paired") +
+    ylab("Profit ($)") +
+    theme_jim +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.65))
+```    
+
+<br>
+
+__The overall profit is `r scales::dollar(sum(profits$q2))` with a standard deviation of `r scales::comma(sd(profits$q2))` due to a `r scales::percent(mean(overstock_hk$overstock))` risk of overstocking.__
+
+# Order from China
+
+We also considered the same problem, but this time assumed that all styles were ordered from China, where the minimum order quantity was 1200 units. The same four scenarios defined for Hong Kong were also relevant to the analysis for ordering from China. As such, the overall optimisation problem remained the same for China as for Hong Kong, only with a different $q_{min}$ value of 1200.
+
+## China order results
+
+The resulting solution from the `Excel` solver, including both order quantity and expected profit for each style is displayed in table 6. 
+
+```{r show_q3}
+quant %>% 
+    select(1, 4) %>% 
+    left_join(profits, by = c("style" = "style")) %>% 
+    select(1, 2, 5) %>% 
+    kable(col.names = c("Style", "Order Quantity", "Expected Profit ($)"),
+          caption = "Table 6: Order quanties and expected profits for each style with Chinese minimum order requirements (1200 units)",
+          format.args = list(big.mark = ","),
+          digits = 0)
+```
+
+Under this scheme, total profit was expected to be `r scales::dollar(sum(profits$q3))`, ordering a total of `r scales::comma(sum(quant$q3))` units.
+
+## Ordering policy risk
+
+We then quantified the risk associated with this ordering policy in the same was as for Hong Kong. The proportion of overstocking events based on the demand distributions generated from Obermeyer's forecasts are displayed in table 7.
+
+```{r overstock_risk_china}
+overstock_china <- demand %>% 
+    select(-2, -3, -4) %>% 
+    gather(sim, value, -Style) %>% 
+    left_join(quant %>% select(style, q3), by = c("Style" = "style")) %>% 
+    mutate(overstock = q3 > value) 
+
+overstock_china %>% 
+    group_by(Style) %>% 
+    summarise(quantity = mean(q3),
+              prop_overstock = mean(overstock)) %>% 
+    mutate(prop_overstock = ifelse(quantity == 0, 0, prop_overstock),
+           prop_overstock = 100*(prop_overstock)) %>% 
+    arrange(Style) %>% 
+    kable(col.names = c("Style", "Order Quantity", "Overstock Likelihood (%)"),
+          caption = "Table 7: Overstocking likelihood for each style when ordering from China.",
+          digits = 0)
+```
+
+The overall (average) risk of overstocking was calculated to be `r scales::percent(mean(overstock_china$overstock))`, slightly higher than for Hong-Kong. 
+
+Similarly, we also assessed the distribution of profit values calculated for China based on the order quantities determined by the optimisation, and the realisation of demand in the simulations. The standard deviation of profit for each style is displayed in table 8, and figure 3 shows the overall distribution of profit for each style.
+
+```{r china_profits}
+china_profits <- read_excel("./jim/optim.xlsx", sheet = "ChinaProfits") %>% gather(sim, value, -Style)
+
+profits %>% 
+    select(style, q3) %>% 
+    left_join(china_profits %>% group_by(Style) %>% summarise(sd = sd(value)), by = c("style" = "Style")) %>% 
+    arrange(style) %>% 
+    kable(col.names = c("Style", "Profit ($)", "Standard Deviation"),
+          digits = 2,
+          format.args = list(big.mark = ","),
+          caption = "Table 8: Mean and standard deviation of profit expectation per style")
+```
+
+```{r show_china_profit, out.height = 1000, out.width=800, fig.cap="Figure 3: Profit estimates for each parka style based on determined order quantites in China."}
+china_profits %>% 
+    ggplot(aes(x = Style, y = value, fill = Style)) +
+    geom_hline(yintercept = 0, colour = "grey") +
+    geom_violin() +
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_brewer(palette = "Paired") +
+    ylab("Profit ($)") +
+    theme_jim +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.65))
+```    
+
+<br>
+
+__The overall profit is `r scales::dollar(sum(profits$q3))` with a standard deviation of `r scales::comma(sd(profits$q3))` due to a `r scales::percent(mean(overstock_china$overstock))` risk of overstocking. The average profit is lower than for Hong Kong, but the standard deviation is marginally smaller.__
+
+# Operational changes
+
+# Sourcing options
