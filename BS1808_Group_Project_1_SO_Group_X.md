@@ -22,11 +22,19 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(knitr)
+<<<<<<< Updated upstream
+=======
+library(readr)
+>>>>>>> Stashed changes
 library(purrr)
 library(readxl)
 
 # Set up theme object for prettier plots
+<<<<<<< Updated upstream
 theme_jim <-  theme(legend.position = "none",
+=======
+theme_jim <-  theme(legend.position = "bottom",
+>>>>>>> Stashed changes
     axis.text.y = element_text(size = 12, colour = "black"),
     axis.text.x = element_text(size = 12, colour = "black"),
     legend.text = element_text(size = 12),
@@ -60,6 +68,7 @@ Each of the 10 styles of Parka under consideration for production had had demand
 
 Table: Table One: Demand forecasts for each style
 
+<<<<<<< Updated upstream
 Style        Laura   Carolyn    Greg   Wendy     Tom   Wally    Mean      SD   SD x2
 ----------  ------  --------  ------  ------  ------  ------  ------  ------  ------
 Anita        4,400     3,300   3,500   1,500   4,200   2,875   3,296   1,047   2,094
@@ -376,3 +385,57 @@ __The overall profit is $520,222 with a standard deviation of 27,844.43 due to a
 # Operational changes
 
 # Sourcing options
+=======
+# Transform the names for easier typying later
+names(forecasts) <- gsub(" ", "_", names(forecasts)) %>% tolower()
+
+# Rename standard_deviation_(x2) for ease
+forecasts <- forecasts %>% mutate(sd2 = `standard_deviation_(x2)`) %>% 
+                select(-`standard_deviation_(x2)`)
+```
+
+In order to perform the analyses for optimal order quantity, random samples of demand for each product were required. Given Obermeyer's assumption that the demand is normally distributed, this is relatively straightforward.
+
+
+```r
+# Set number of samples required
+samples <- 1000
+
+# Set seed for reproducibility
+set.seed(19891110)
+
+# Create function for generating samples
+gen_samples <- function(samples, avg, sd) {
+    rnorm(samples, avg, sd)
+}
+
+# Create samples
+forecasts <- forecasts %>% 
+    mutate(dist = pmap(list(samples, average, sd2), gen_samples))
+
+# Set up demand matrix
+demand <- do.call(rbind, forecasts$dist)
+```
+
+# Question One
+
+
+```r
+demand <- read_excel("./jim/optim.xlsx", sheet = "Demand")
+
+demand %>% 
+    select(-3, -4) %>% 
+    gather(sample, demand, -Style, -Average) %>% 
+    ggplot(aes(x = demand, fill = Style)) +
+    geom_histogram(colour = "white") +
+    facet_grid(Style ~ .) +
+    scale_x_continuous(labels = scales::comma,
+                       limits = c(-4000, 10000)) +
+    scale_fill_brewer(palette = "Set3") +
+    theme_jim
+```
+
+<img src="BS1808_Group_Project_1_SO_Group_X_files/figure-html/unnamed-chunk-1-1.png" title="" alt="" width="800" height="1000" style="display: block; margin: auto;" />
+
+
+>>>>>>> Stashed changes
