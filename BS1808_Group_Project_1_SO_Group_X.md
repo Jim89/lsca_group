@@ -1,5 +1,5 @@
 # BS1808 Logistics and Supply Chain Analytics Group Assignment One
-Jone Leung, Somto Okoye, Valentin Poirelle, Jin Lee, Jim Leach  
+Jone Leung, Somto Okoye, Valentin Poirelle, Jin Anne Lee, Jim Leach  
 `r Sys.Date()`  
 
 <br>
@@ -22,6 +22,13 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(knitr)
+```
+
+```
+## Warning: package 'knitr' was built under R version 3.2.5
+```
+
+```r
 library(purrr)
 library(readxl)
 
@@ -91,7 +98,7 @@ Initially, we considered a situation in which there were no minimum order requir
 In order to do so, we defined a formula that provided an expectation of the profit for a given quantity of each style:
 
 \begin{equation}
-Profit (\pi_q) = \sum_{j=1}^{10}\bigg[\frac{1}{n} \sum_{i=1}^{n} \Big[p.d_{ij} + s.\max(Q_j - d_{ij}, 0) - c.\max(Q_j, d_{ij})\Big]\bigg]
+\mbox{Profit} (\Pi_q) = \sum_{j=1}^{10}\bigg[ \frac{1}{n} \sum_{i=1}^n \Big[p.d_{ij} + s    .\max(Q_j - d_{ij}, 0) - c.\max(Q_j, d_{ij})\Big] \bigg]
 \end{equation}
 
 Where:
@@ -102,11 +109,12 @@ Where:
 * $c$ is the cost of production; and 
 * $d_{ij}$ is the $i$^th^ demand value for style $j$.
 
-We note that this is not the standard formula for profit when determining optimal order quantity. This is because Obermeyer only have to produce 10,000 units now and can produce the rest later. Therefore sales revenue is a function of the actual demand realised and not dependent on the current order quantity. However, the cost of production may change if more/less of each style is produced now relative the the actual demand realised. Hence the first and third terms in the inner summation differ slightly from the standard formula.
+We note that this is not the standard formula for profit when determining optimal order quantity. This is because Obermeyer only have to produce 10,000 units now and can produce the rest later. Therefore sales revenue is a function of the actual demand realised and not dependent on the current order quantity. However, the (final) cost of production may change (in the future) if more/less of each style is produced now relative the the actual demand realised. Hence the first and third terms in the inner summation differ slightly from the standard formula.
 
 Having defined this function, we then used the `Excel` solver to find the optimum order quantity for each style, $Q_j^*$ via the following optimsation program:
 
-\begin{equation} \begin{split}
+\begin{equation} 
+\begin{split}
 \max_{Q} \mathbb{E} (\pi_q) \\
 \text{s.t.} \\
 \sum_{j=1}^{10} Q_j \geq 10000 \\
@@ -374,5 +382,10 @@ Teri          31,266.02            21,610.36
 __The overall profit is $520,222 with a standard deviation of 27,844.43 due to a 18% risk of overstocking. The average profit is lower than for Hong Kong, but the standard deviation is marginally smaller.__
 
 # Operational changes
+
+Question: What operational changes would you recommend to Wally to improve performance? Clearly list the expected benefits from each change. Please try and be very specific in terms of the changes and benefits in response to this question.
+
+(Longer version to be edited) To improve performance is to maximise profit. As profit is a function of overstocking costs and number ordered. 
+Possibly: if possible, order similar styles with high variance together then customise. 
 
 # Sourcing options
