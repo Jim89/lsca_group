@@ -423,48 +423,19 @@ How should Obermeyer management think (both short term and long term) about sour
 
 ## Short Term
 
-From the text, "Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". This implies that trading relationships with retailers and quality of the products are very important to the success of the company. Objectively, the lower minimum requirement from Hong Kong yields a higher expected profit for Obermeyer.  Based on the company's values, product quality, worker's conditions and delivery reliability is better if products were sourced from Hong Kong. Although labour costs are more expensive, the overall expected profit is higher. In addition, most retailers prefer to receive their full orders. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes and there is no risk of suffering from the import quota set by the US. 
+From the text, "Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". Apart from profit, this implies that trading relationships with retailers and quality of the products are very important to the success of the company. Another consideration to take into is economic trade relations between the countries. These are four criteria that Obermeyer should use to gauge which factories to source their products from. 
+
+Objectively, the lower minimum requirement from Hong Kong yields a higher expected profit for Obermeyer.  Based on the company's values, product quality, worker's conditions and delivery reliability is better if products were sourced from Hong Kong. Although labour costs are more expensive, the overall expected profit is higher. In addition, most retailers prefer to receive their full orders. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes and there is no risk of suffering from the import quota set by the US.
+
+Moreover, if Wally adopts tailored postponement, this makes Hong Kong's flexibility, quality control and reliability more desirable for managing this process than China. In economic terms, although China has greater absolute advantage, Hong Kong has a greater relative advantage in production.
 
 ## Long Term
 
-In the long term, it may be possible to take advantage of lower costs from producing in China as other risks reduces. Firstly, if conditions change and when the China factories become better at dealing with uncertainty and the US decides to change its regulations, if Obermeyer continues to grow with popularity, more orders can be changed through 
+In the long term, it may be possible to take advantage of lower costs from producing in China as other risks reduces. Firstly, if conditions change and when the China factories become better at dealing with uncertainty and the US decides to change its regulations, if Obermeyer continues to grow with popularity and receives larger orders, then it should consider producing larger quantities through China. 
 
+It may be possible that large and less uncertain demands be posted to China, and highly uncertain demands and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can try to reduce losses by producing more. 
 
-Company's growth & efficiency
+## Conclusion
 
-Option: 
-Produce first batch in China, then place second order from HK.
-Produce customised batch when placing the second order. 
-Produce sample in HK with smaller minimum size, then produce large batches in China
-
-Long Term
-- more profits to be made in China
-- however, quality may not be there
-- US restrictions on import quantity 
-- in the long term China may not be able to manage production and inventory risks as well as HK.
-Was Obermeyer's trend toward increased production in China too risky given the uncertainty in China's trade relationship with the United States?
-
-- The U.S. government limited the number of units that could be imported from China into the United States. Government officials at the U.S. port of entry reviewed imports; products violating quota restrictions were sent back to the country of origin. Since quota restrictions were imposed on the total amount of a product category all companies imported from China, individual companies often rushed to get their products into the country before other firms had "used up" the available quota.
-
-Ideas
-
-1. First order: HK, second order, possibly largest Bulk: China, final order: Hong Kong. Timing wise, each fits the conditions of the factory, and meets deadlines as well. 
-
-
-Long Term: whole cycle:
-Toward the end of August, Obermeyer shipped orders to retailers via small-package carriers such as UPS. Retail sales built gradually during September, October, and November, peaking in December and January. By December or January, retailers who identified items of which they expected to sell more than they currently had in stock often requested replenishment of those items from Obermeyer. This demand was filled if Obermeyer had the item in stock.
-By February Obermeyer started to offer replenishment items to retailers at a discount. Similarly, retailers started marking down prices on remaining stock in an attempt to clear their shelves by the end of the season. As the season progressed, retailers offered deeper discounts; items remaining at the end of the season were held over to the following year and sold at a loss. Obermeyer used a variety of methods to liquidate inventory at year-end, including selling large shipping containers of garments well below manufacturing cost to markets in South America and engaging in barter trade (for example, trading parkas in lieu of money for products or services used by the company, such as hotel rooms or air flights).
-
-Obermeyer sourced most of its outerwear products through Obersport. In recent years, Wally had worked with Obersport to "pre-position" (purchase prior to the season and hold in inventory) greige fabric1 as part of a wider effort to cope with manufacturing lead times. To pre-position the fabric, Obermeyer would contract with fabric suppliers to manufacture a specified amount of fabric of a given type each month; Obermeyer would later specify how it wanted the fabric to be dyed and/or printed. Obermeyer had to take possession of all fabric it contracted for, whether or not it was
-1Greige fabric is fabric that has been woven or knitted but not yet dyed or printed.
-6
-     Textile and Accessories Suppliers
-    Obersport
-  This document is authorized for use only in BS1808 Logistics and Supply Chain Analytics by Kerrie Hall, Imperial College - London from May 2016 to October 2016.
-Sport Obermeyer
-Retailers
-Sport Obermeyer, Ltd. 695-022
-actually needed. Different types of fabrics were purchased for use as shell (outer) fabric and lining fabric. Approximately 10 types of shell fabrics were required each year. Obersport purchased shell fabric from vendors in the United States, Japan, Korea, Germany, Austria, Taiwan, and Switzerland. Lining fabric was sourced primarily from Korea and Taiwan. (Exhibit 6 provides information on lead times, variety, and other aspects of component sourcing.)
-
-The question asked is: There are other options available, if and when necessary, even when costs are high. How to deal with uncertainty at different times of the season during the ordering process.
+In conclusion, Hong Kong is recommended in the short term and Obermeyer should work towards production in China in the long term. 
 
