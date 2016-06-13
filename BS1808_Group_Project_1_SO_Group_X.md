@@ -382,63 +382,55 @@ Teri          31,266.02            21,610.36
 __The overall profit is $520,222 with a standard deviation of 27,844.43 due to a 18% risk of overstocking. The average profit is lower than for Hong Kong, but the standard deviation is marginally smaller.__
 
 # Operational changes recommendations
-Question: What operational changes would you recommend to Wally to improve performance? Clearly list the expected benefits from each change. Please try and be very specific in terms of the changes and benefits in response to this question.
 
-__Recommended changes list__
+All in all Wally's job at Obermeyer is to use the demand forecasts to inform his order decisions at Obersport. One of Wally's biggest problem is that full production starts long before initial orders are placed. This leads to overstocking on less popular goods and a shortage on very popular goods. To improve performance based on forecasts Wally can make orders to Obersport based on tailored postponement. If the styles' demand variability is low, Wally can consider placing orders early on. If the styles' demand variability is high, Wally should design tailored postponement of the styles to cope with demand uncertainty. Furthermore, styles with higher demand uncertainty can be produced through Hong Kong, and vice versa. 
 
-1. Tailored Postponement
-2. 
+__Tailored Postponement in Ordering__
 
-## Tailored Postponement
+Wally can develop a procedure where styles can be made from a standard base product that can be ordered in bulk and then customised based when demand is certain, similar to his pre-ordering of Greige materials. This allows for the aggregation of demand across styles that have higher variability. We assume that aggregation will reduce variance, but increase production costs as well due to customisation later in the production time and increase production time. Additionally, it is also assumed that he is looking to improve performance in order to increase expected profits. 
 
-With Wally leaning towards quantitative methods, it is assumed that he is looking to improve performance in order to increase expected profits. One available method for increasing expected profits from forecasting is to reduce demand uncertainty. This can be achieved through tailored postponement. An option is to evelop a procedure where styles can be made from a standard base product that can be ordered in bulk and then customised based when demand is certain. This allows for the aggregation of demand across styles that have higher variability. We assume that aggregation will reduce variance, but increase production costs as well due to customisation later in the production time and increase production time. 
+This method can be done especially so for meeting second and third orders placed at Obersport, when it is closer to the delivery date to retailers. Assuming that storage costs is much less than the cost of selling overstocked goods at a large discount, it is preferable to adopt tailored postponement for meeting the last 20% and additional orders made by retailers. 
 
--look for evidence in the text that the styles are similar to customise.
+For both HK and CN, we can consider the following options for aggregating demand:
 
-Generally, as uncertainty decreases, it becomes easier to match inventory to demand, and so expected profit increases. Expected understock and expected overstock will reduce. In this case, the cost of understocking is zero, and the cost of overstocking is high. So it would be better if we understock than overstock. So we want a lower inventory. In our case, when demand is highly uncertain, the optimal quantity will be below the mean. If we reduce the uncertainty, optimal quantity will increase and approach the mean.
-
-For both HK and CN, we can consider the following options for aggregating demand. 
 1. aggregate high variability without considering quantity demanded
 2. aggregate low demand quantity without considering variance
 3. aggregate in a combination of variability + quantity demanded
 
 The products with the highest standard deviation are: Anita - 2094, Daphne - 1394, Seduced - 1113 and Stephanie - 1048.
 
-### Consider the Ordering Policy from HK
+## Consider the Ordering Policy from HK
 
 There are four styles with quantity demanded estimated to be below 600 for maximum profits: Stephanie, Anita, Teri, Isis and Gail. The styles with zero orders are Gail and Stephanie, and styles with 600 orders are Isis and Stephanie. The styles that contribute most to the likelihood of overstocking in order are Teri, Isis and Daphne. As the minimum requirement is 10,000, with some optimal order quantity at zero, this contributes to the likelihood of overstocking on other styles.
 
 Solutions are: group the products with highest standard deviation together, which are Anita, Daphne, Seduced and Stephane. To reduce likelihood of overstocking, styles of Teri, Isis and Daphne can be grouped together. To aim to produce all styles, Stephanie, Gail, Isis and Teri can be grouped together. All these solutions will reduce demand uncertainty and hence increase expected profits to an extent. 
 
-### Consider the Ordering Policy from CN
+## Consider the Ordering Policy from CN
 
 Products with zero order quantity are: Gail, Isis, Entice, Teri and Stephanie. Styles with estimated demand being less than 1000 are Gail, Isis, Stephanie and Teri. Hence, grouping the five styles together will reduce demand uncertainty altogether. 
 
-### Benefits of reducing uncertainty includes
-1. For the sample, the cost of overstocking will be reduces, leading to an increase in expected profits.
-2. Retailers can see the style samples and make more accurate orders.
-3. 
+## Benefits of Tailored Postponement
 
-When is the buying decision made? After buying decision is made, they can produce the remaining stocks. Looking at the way the style is produced and how it will affect the production process. E.g. at the factory, is everything done?
-
+1. Generally, with tailored postponement it becomes easier to match inventory or supply to demand, expected understock and expected overstock will reduce, leading to an increase in expected profits. In our case, the cost of understocking is zero, and the cost of overstocking is high. Therefore, the cost of overstocking will decrease for each style. 
+2.  More specifically, inventory costs will decrease. As the supply chain process is approximately two years from design to the time until delivery, cost of inventory until delivery of goods to retailers is high due to the long time period. Reducing demand uncertainty can reduce storage costs drastically.
+3. Furthermore, it can reduce the number of overstocked goods that needs to be sold at large discounts. By becoming better at meeting demands, Obermeyer can maintain its reputation and ensure that its goods are reaching its customers. Obermeyer can even start placing orders for making generic base materials for tailored postponemnt before placing full orders at the beginning.
+4. In making more accurate orders overall, this reduces pressures on productions at Obersport, helps Obersport meet retailer's demands and maintain good relationships with retailers.  
 
 
 # Sourcing options
+
 How should Obermeyer management think (both short term and long term) about sourcing in Hong Kong versus China? What sourcing policy would you recommend?
 
-Short Term
-Company's products
-- quality is better in HK
-- more experience and better SC relations in HK
-- Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style, and targeted the middle to high end of the skiwear market.Functionality was critical to the serious skier—products had to be warm and water-proof, yet not constrain the skier's ability to move his or her arms and legs freely.
-Company's Supply Chain & Supply China Relations
-- less risk when producing in HK, more likely to meet deadlines due to shorter production lines
-- better worker conditions in HK
-Company's profits
-Company's reputation
-Company's growth & efficiency
+## Short Term
 
-The allocation of operations to workers differed from one factory to another depending on the workers' level of skill and the degree of worker cross-training. Workers in Hong Kong worked about 50% faster than their Chinese counterparts. In addition to being more highly skilled, Hong Kong workers were typically trained in a broader range of tasks. Thus, a parka line in Hong Kong that required 10 workers to complete all operations might require 40 workers in China. Longer production lines in China led to greater imbalance in these lines; hence, a Hong Kong sewer's actual output during a given period of time was nearly twice that of a Chinese worker.
+From the text, "Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". This implies that trading relationships with retailers and quality of the products are very important to the success of the company. Objectively, the lower minimum requirement from Hong Kong yields a higher expected profit for Obermeyer.  Based on the company's values, product quality, worker's conditions and delivery reliability is better if products were sourced from Hong Kong. Although labour costs are more expensive, the overall expected profit is higher. In addition, most retailers prefer to receive their full orders. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes and there is no risk of suffering from the import quota set by the US. 
+
+## Long Term
+
+In the long term, it may be possible to take advantage of lower costs from producing in China as other risks reduces. Firstly, if conditions change and when the China factories become better at dealing with uncertainty and the US decides to change its regulations, if Obermeyer continues to grow with popularity, more orders can be changed through 
+
+
+Company's growth & efficiency
 
 Option: 
 Produce first batch in China, then place second order from HK.
@@ -450,6 +442,29 @@ Long Term
 - however, quality may not be there
 - US restrictions on import quantity 
 - in the long term China may not be able to manage production and inventory risks as well as HK.
--  Would China's larger minimum order sizes limit the company's ability to increase the range of products it offered or to manage inventory risk? Was Obermeyer's trend toward increased production in China too risky given the uncertainty in China's trade relationship with the United States?
+Was Obermeyer's trend toward increased production in China too risky given the uncertainty in China's trade relationship with the United States?
+
 - The U.S. government limited the number of units that could be imported from China into the United States. Government officials at the U.S. port of entry reviewed imports; products violating quota restrictions were sent back to the country of origin. Since quota restrictions were imposed on the total amount of a product category all companies imported from China, individual companies often rushed to get their products into the country before other firms had "used up" the available quota.
+
+Ideas
+
+1. First order: HK, second order, possibly largest Bulk: China, final order: Hong Kong. Timing wise, each fits the conditions of the factory, and meets deadlines as well. 
+
+
+Long Term: whole cycle:
+Toward the end of August, Obermeyer shipped orders to retailers via small-package carriers such as UPS. Retail sales built gradually during September, October, and November, peaking in December and January. By December or January, retailers who identified items of which they expected to sell more than they currently had in stock often requested replenishment of those items from Obermeyer. This demand was filled if Obermeyer had the item in stock.
+By February Obermeyer started to offer replenishment items to retailers at a discount. Similarly, retailers started marking down prices on remaining stock in an attempt to clear their shelves by the end of the season. As the season progressed, retailers offered deeper discounts; items remaining at the end of the season were held over to the following year and sold at a loss. Obermeyer used a variety of methods to liquidate inventory at year-end, including selling large shipping containers of garments well below manufacturing cost to markets in South America and engaging in barter trade (for example, trading parkas in lieu of money for products or services used by the company, such as hotel rooms or air flights).
+
+Obermeyer sourced most of its outerwear products through Obersport. In recent years, Wally had worked with Obersport to "pre-position" (purchase prior to the season and hold in inventory) greige fabric1 as part of a wider effort to cope with manufacturing lead times. To pre-position the fabric, Obermeyer would contract with fabric suppliers to manufacture a specified amount of fabric of a given type each month; Obermeyer would later specify how it wanted the fabric to be dyed and/or printed. Obermeyer had to take possession of all fabric it contracted for, whether or not it was
+1Greige fabric is fabric that has been woven or knitted but not yet dyed or printed.
+6
+     Textile and Accessories Suppliers
+    Obersport
+  This document is authorized for use only in BS1808 Logistics and Supply Chain Analytics by Kerrie Hall, Imperial College - London from May 2016 to October 2016.
+Sport Obermeyer
+Retailers
+Sport Obermeyer, Ltd. 695-022
+actually needed. Different types of fabrics were purchased for use as shell (outer) fabric and lining fabric. Approximately 10 types of shell fabrics were required each year. Obersport purchased shell fabric from vendors in the United States, Japan, Korea, Germany, Austria, Taiwan, and Switzerland. Lining fabric was sourced primarily from Korea and Taiwan. (Exhibit 6 provides information on lead times, variety, and other aspects of component sourcing.)
+
+The question asked is: There are other options available, if and when necessary, even when costs are high. How to deal with uncertainty at different times of the season during the ordering process.
 
