@@ -55,7 +55,7 @@ toproper <- function(x) {
 
 # Simulating demand
 
-Each of the 10 styles of Parka under consideration for production had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a stardard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
+Each of the 10 styles of Parka under consideration for production had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a standard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
 
 
 Table: Table One: Demand forecasts for each style
@@ -76,7 +76,7 @@ Teri           800       900   1,000   1,100     950   1,850   1,100     381    
 Using these values we generated 1000 estimates of demand for each style from a normal distribution with a mean and standard deviation as described above. The distributions of these 1000 estimates for each parka are displayed in figure 1. Note, figure 1 graphs 90 degree - flipped and mirrored - density plots.
 
 <div class="figure" style="text-align: center">
-<img src="BS1808_Group_Project_1_SO_Group_X_edit2_files/figure-html/plot_demand-1.png" alt="Figure 1: Demand estimate distribution for each parka style." width="800" height="1000" />
+<img src="BS1808_Group_Project_1_SO_Group_11_files/figure-html/plot_demand-1.png" alt="Figure 1: Demand estimate distribution for each parka style." width="800" height="1000" />
 <p class="caption">Figure 1: Demand estimate distribution for each parka style.</p>
 </div>
 
@@ -143,25 +143,25 @@ In order to refine the problem we then considered the situation in which there _
 
 ## Define scenarios
 
-When considering total profit from the order quantity, four scenarious had to be considered:
+When considering total profit from the order quantity, four scenarios had to be considered:
 
 1. The true demand realisation was _less_ than the initial order quantity, $Q_j$;
-2. The true demand realisation was greater than the initial order quantity but below a threshold (based on the mimimum order requirement) that would trigger making a second order for that style at a later date;
+2. The true demand realisation was greater than the initial order quantity but below a threshold (based on the minimum order requirement) that would trigger making a second order for that style at a later date;
 3. The true demand realisation was greater than the initial order quantity plus the threshold value that would trigger making a second order for that style at a later date; and
 4. The true demand realisation was greater than the initial order quantity plus the minimum order quantity.
 
 ## Define scenario profit outcomes
 
-In each of the four scenarious, the profit formula would change slightly:
+In each of the four scenarios, the profit formula would change slightly:
 
 1. In the first scenario, Obermeyer would sell only the true demand realised, there would be an overstocking cost (based on the difference between the order quantity and the true demand), and the production cost would be dependent only on the initial order quantity;
-2. In the second scenario, Obermeyer would sell the intial order quantity, there would be no overstocking cost and the production cost would be dependent only on the initial order quantity;
-3. In the third scenario, Obermeyer would see the true demand realised, there would be an overstocking cost (based on the difference in the initial order quantity plus the minimum order quantity less the true demand), and the production cost would be dependent on the intial order quantity plus the minimum order quantity; and
+2. In the second scenario, Obermeyer would sell the initial order quantity, there would be no overstocking cost and the production cost would be dependent only on the initial order quantity;
+3. In the third scenario, Obermeyer would see the true demand realised, there would be an overstocking cost (based on the difference in the initial order quantity plus the minimum order quantity less the true demand), and the production cost would be dependent on the initial order quantity plus the minimum order quantity; and
 4. In the fourth scenario, Obermeyer would sell the true demand realised, there would be no overstocking cost, and the production cost would be dependent only on the true demand realisation.
 
 ## Define scenario profit functions
 
-In order to implement these four scenarious in the overall profit calculation, we defined four separate profit functions, one for each scenario (labelled $P_1$ to $P_4$):
+In order to implement these four scenarios in the overall profit calculation, we defined four separate profit functions, one for each scenario (labelled $P_1$ to $P_4$):
 
 \begin{equation} 
 P_1 = p.d_{ij} + s.\max(Q_j - d_{ij}, 0) - c.Q_j
@@ -211,7 +211,7 @@ Using the individual profit functions in conjunction with the indicator function
 Profit (\pi_q) = \sum_{j=1}^{10}\bigg[\frac{1}{n} \sum_{i=1}^{n} \Big[I_1.P_1 + (I_2 - I_1).P_2 + (I_3 - I_2).P_3 + I_4.P_4\Big]\bigg]
 \end{equation}
 
-We then translated this into a new optimsation problem that incorporated the minimum order requirements of producing in Hong Kong:
+We then translated this into a new optimisation problem that incorporated the minimum order requirements of producing in Hong Kong:
 
 \begin{equation} \begin{split}
 \max_{Q_j, z_j} \mathbb{E} (\pi_q) \\
@@ -224,7 +224,7 @@ z_j \in \{0, 1\}
 \end{split}
 \end{equation}
 
-Where $z_j$ is a binary variable indicating if style $j$ will be produced (which enables the minimum order quantites to be modelled).
+Where $z_j$ is a binary variable indicating if style $j$ will be produced (which enables the minimum order quantities to be modelled).
 
 ## Hong Kong order results
 
@@ -272,7 +272,7 @@ Teri                    600                         26
 
 The overall (average) risk of overstocking was calculated to be 15.9%. 
 
-In order to quantify this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily caused by overstocking on the intial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
+In order to quantify this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily caused by overstocking on the initial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
 
 
 Table: Table 5: Mean and standard deviation of profit expectation per style
@@ -291,8 +291,8 @@ Stephanie      31121.50             30049.65
 Teri           31776.21             21561.59
 
 <div class="figure" style="text-align: center">
-<img src="BS1808_Group_Project_1_SO_Group_X_edit2_files/figure-html/show_hk_profit-1.png" alt="Figure 2: Profit estimates for each parka style based on determined order quantites in Hong Kong." width="800" height="1000" />
-<p class="caption">Figure 2: Profit estimates for each parka style based on determined order quantites in Hong Kong.</p>
+<img src="BS1808_Group_Project_1_SO_Group_11_files/figure-html/show_hk_profit-1.png" alt="Figure 2: Profit estimates for each parka style based on determined order quantites in Hong Kong. The shapes show the distribution of profit for each parka." width="800" height="1000" />
+<p class="caption">Figure 2: Profit estimates for each parka style based on determined order quantites in Hong Kong. The shapes show the distribution of profit for each parka.</p>
 </div>
 
 <br>
@@ -366,25 +366,25 @@ Stephanie     30,001.15            30,610.15
 Teri          31,266.02            21,610.36
 
 <div class="figure" style="text-align: center">
-<img src="BS1808_Group_Project_1_SO_Group_X_edit2_files/figure-html/show_china_profit-1.png" alt="Figure 3: Profit estimates for each parka style based on determined order quantites in China." width="800" height="1000" />
-<p class="caption">Figure 3: Profit estimates for each parka style based on determined order quantites in China.</p>
+<img src="BS1808_Group_Project_1_SO_Group_11_files/figure-html/show_china_profit-1.png" alt="Figure 3: Profit estimates for each parka style based on determined order quantites in China. The shapes show the distribution of profit for each parka." width="800" height="1000" />
+<p class="caption">Figure 3: Profit estimates for each parka style based on determined order quantites in China. The shapes show the distribution of profit for each parka.</p>
 </div>
 
 <br>
 
 __The overall profit is $520,222 with a standard deviation of 27,844.43 due to a 18% risk of overstocking. The average profit is lower than for Hong Kong, but the standard deviation is marginally smaller.__
 
-# Operational changes recommendations
+# Operational recommendations
 
 All in all Wally's job at Obermeyer is to use the demand forecasts to inform his order decisions at Obersport. One of Wally's biggest problem is that full production starts long before initial orders are placed. This leads to overstocking on less popular goods and a shortage on very popular goods. To improve performance based on forecasts Wally can make orders to Obersport based on tailored postponement. If the styles' demand variability is low, Wally can consider placing orders early on. If the styles' demand variability is high, Wally should design tailored postponement of the styles to cope with demand uncertainty. Furthermore, styles with higher demand uncertainty can be produced through Hong Kong, and vice versa. 
 
-__Tailored Postponement in Ordering__
+## Tailored Postponement
 
 Wally can develop a procedure where styles can be made from a standard base product that can be ordered in bulk and then customised based when demand is certain, similar to his pre-ordering of Greige materials. This allows for the aggregation of demand across styles that have higher variability. We assume that aggregation will reduce variance, but increase production costs as well due to customisation later in the production time and increase production time. Additionally, it is also assumed that he is looking to improve performance in order to increase expected profits. 
 
 This method can be done especially so for meeting second and third orders placed at Obersport, when it is closer to the delivery date to retailers. Assuming that storage costs is much less than the cost of selling overstocked goods at a large discount, it is preferable to adopt tailored postponement for meeting the last 20% and additional orders made by retailers. 
 
-For both HK and CN, we can consider the following options for aggregating demand:
+For both Hong Kong and China, we can consider the following options for aggregating demand:
 
 1. aggregate high variability without considering quantity demanded
 2. aggregate low demand quantity without considering variance
@@ -392,32 +392,33 @@ For both HK and CN, we can consider the following options for aggregating demand
 
 The products with the highest standard deviation are: Anita - 2094, Daphne - 1394, Seduced - 1113 and Stephanie - 1048.
 
-## Consider the Ordering Policy from HK
+### Hong Kong Ordering Policy
 
 There are four styles with an optimal quantity at/below 600: Stephanie, Teri, Isis and Gail. Gail and Stephanie at 0, and Isis and Stephanie at 600. And Teri, Isis and Daphne contribute most to the likelihood of overstocking. For HK, with a minimum requirement of 10,000, having some optimal quantities at zero contributes to the likelihood of overstocking on other styles.
 
 Solutions are: group the products with highest standard deviation together, which are Anita, Daphne, Seduced and Stephane. To reduce likelihood of overstocking, styles of Teri, Isis and Daphne can be grouped together. To aim to produce all styles, Stephanie, Gail, Isis and Teri can be grouped together. All these solutions will reduce demand uncertainty and hence increase expected profits to an extent. 
 
-## Consider the Ordering Policy from CN
+### China Ordering Policy
 
 Products with zero order quantity are: Gail, Isis, Entice, Teri and Stephanie. Styles with estimated demand being less than 1000 are Gail, Isis, Stephanie and Teri. Hence, grouping the five styles together will reduce demand uncertainty altogether. 
 
-## Benefits of Tailored Postponement
+### Benefits
 
-1. In general, tailored postponement reduces expected under and over stocking, which increases expected profits. In our case, the cost of understocking is zero and the cost of overstocking is high. The cost of overstocking will decrease for each style. 
-2. To elaborate, the cost savings from reducing the number of overstocked goods materialises from reducing the amount of excess goods sold at large discounts.
-3. Additional savings from reducing inventory level come from the reduction in inventory costs. Note that the supply chain process is approximately two years from the time of design to the time of delivery, which imply costly storage costs. Reducing demand uncertainty can reduce storage costs.
-4. Postponement reduces pressures on productions at Obersport, and helps Obersport to meet retailer's demands/maintain good relationships with retailers.  
+In general, tailored postponement reduces expected under and over stocking, which increases expected profits. In our case, the cost of understocking is zero and the cost of overstocking is high. The cost of overstocking will decrease for each style. 
+
+To elaborate, the cost savings from reducing the number of overstocked goods materialises from reducing the amount of excess goods sold at large discounts.
+
+Additional savings from reducing inventory level come from the reduction in inventory costs. Note that the supply chain process is approximately two years from the time of design to the time of delivery, which imply costly storage costs. Reducing demand uncertainty can reduce storage costs.
+
+Postponement reduces pressures on productions at Obersport, and helps Obersport to meet retailer's demands/maintain good relationships with retailers.  
 
 # Sourcing options
 
-How should Obermeyer management think (both short term and long term) about sourcing in Hong Kong versus China? What sourcing policy would you recommend?
-
 ## Short Term
 
-From the text, "Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". Apart from profit, this implies that trading relationships with retailers and quality of the products are important to the success of the company. Another consideration to take into account are economic trade relations between countries.Profit, quality, relationships, and economics are four criteria that Obermeyer should use to gauge which factories to source their products from. 
+"Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". Apart from profit, this implies that trading relationships with retailers and quality of the products are important to the success of the company. Another consideration to take into account is trade relations between countries. Profit, quality, relationships, and economics are four criteria that Obermeyer should use to gauge which factories to source their products from. 
 
-Objectively, the lower minimum requirement from Hong Kong factories yields a higher expected profit for Obermeyer. Based on the company's values, product quality, worker's conditions and delivery reliability, products sourced from Hong Kong are better. Although labour costs are more expensive, the overall expected profit is higher. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes and there is no risk of suffering from the import quota set by the US.
+Objectively, the lower minimum requirement from Hong Kong factories yields a higher expected profit for Obermeyer. Based on the company's values, product quality, worker's conditions and delivery reliability, products sourced from Hong Kong are better. Although labour costs are more expensive, the overall expected profit is higher. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes, and there is no risk of suffering from the import quota set by the US.
 
 Moreover, if Wally adopts tailored postponement, this makes Hong Kong's flexibility, quality control and reliability more desirable for managing this process than China.
 
@@ -425,7 +426,7 @@ Moreover, if Wally adopts tailored postponement, this makes Hong Kong's flexibil
 
 In the long term, it may be possible to take advantage of lower costs from producing in China if other risks reduce. Meaning if conditions change; when the China factories become better at dealing with uncertainty, and the US decides to change its regulations. If Obermeyer continues to grow with popularity and receives larger orders, then it should consider producing larger quantities through China. 
 
-It may be possible that large and less volatile products be made in China, and higher volitility demand sytles and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can be used as a back up to reduce losses by producing more. This of course assumes non-binding minimum order constraints, this would naturally be doable when the company grows and has more sales.
+It may be possible that larger and less volatile products could be made in China, and higher volatility demand styles and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can be used as a back up to reduce losses by producing more. This of course assumes non-binding minimum order constraints, this would naturally be doable when the company grows and has more sales.
 
 ## Conclusion
 
