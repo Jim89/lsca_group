@@ -64,11 +64,19 @@ toproper <- function(x) {
 
 # Simulating demand
 
+<<<<<<< HEAD
 <<<<<<< 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
 Each of the 10 styles of Parka under consideration for production had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a standard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
 =======
 Each of the 10 styles of Parka under consideration for production had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a stardard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
 >>>>>>> Checked for typos, and added/condensed and clarified some of the end parts.:BS1808_Group_Project_1_SO_Group_X.Rmd
+=======
+<<<<<<< HEAD:BS1808_Group_Project_1_SO_Group_X.Rmd
+Each of the 10 styles of Parka under consideration for production had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a stardard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
+=======
+Each of the 10 styles of Parka under consideration for production had demand forecasts made for them by members of the Obermeyer team. For each style, Obermeyer assumed that the _true_ demand value could be modelled as a random number from the [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) with a mean given by the average of the individuals' forecasts, and a standard deviation equal to _twice_ the standard deviation of all individuals' forecasts. The individual forecasts, and the resulting mean and standard deviation values for the true demand distributions, are displayed in table one. 
+>>>>>>> 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
+>>>>>>> 4ff86e6d845a44dc9f4898c0a873b15dfb3d5fae
 
 ```{r show_raw}
 # Get raw demand data
@@ -288,11 +296,19 @@ overstock_hk %>%
 
 The overall (average) risk of overstocking was calculated to be `r scales::percent(mean(overstock_hk$overstock))`. 
 
+<<<<<<< HEAD
 <<<<<<< 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
 In order to quantify this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily caused by overstocking on the initial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
 =======
 In order to quantify this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily caused by overstocking on the intial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
 >>>>>>> Checked for typos, and added/condensed and clarified some of the end parts.:BS1808_Group_Project_1_SO_Group_X.Rmd
+=======
+<<<<<<< HEAD:BS1808_Group_Project_1_SO_Group_X.Rmd
+In order to quantify this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily caused by overstocking on the intial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
+=======
+In order to quantify this more concretely, we also assessed the distribution of profit values calculated based on the order quantities determined by the optimisation, and the realisation of demand in the simulations (as negative impacts on profit will be primarily caused by overstocking on the initial order). The standard deviation of profit for each style is displayed in table 5, and figure 2 shows the overall distribution of profit for each style.
+>>>>>>> 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
+>>>>>>> 4ff86e6d845a44dc9f4898c0a873b15dfb3d5fae
 
 ```{r hk_profits}
 hk_profits <- read_excel("./jim/optim.xlsx", sheet = "HKProfits") %>% gather(sim, value, -Style)
@@ -429,6 +445,7 @@ Products with zero order quantity are: Gail, Isis, Entice, Teri and Stephanie. S
 
 ### Benefits
 
+<<<<<<< HEAD
 <<<<<<< 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
 In general, tailored postponement reduces expected under and over stocking, which increases expected profits. In our case, the cost of understocking is zero and the cost of overstocking is high. The cost of overstocking will decrease for each style. 
 
@@ -439,6 +456,18 @@ To elaborate, the cost savings from reducing the number of overstocked goods mat
 3. Additional savings from reducing inventory level come from the reduction in inventory costs. Note that the supply chain process is approximately two years from the time of design to the time of delivery, which imply costly storage costs. Reducing demand uncertainty can reduce storage costs.
 4. Postponement reduces pressures on productions at Obersport, and helps Obersport to meet retailer's demands/maintain good relationships with retailers.  
 >>>>>>> Checked for typos, and added/condensed and clarified some of the end parts.:BS1808_Group_Project_1_SO_Group_X.Rmd
+=======
+<<<<<<< HEAD:BS1808_Group_Project_1_SO_Group_X.Rmd
+1. In general, tailored postponement reduces expected under and over stocking, which increases expected profits. In our case, the cost of understocking is zero and the cost of overstocking is high. The cost of overstocking will decrease for each style. 
+2. To elaborate, the cost savings from reducing the number of overstocked goods materialises from reducing the amount of excess goods sold at large discounts.
+3. Additional savings from reducing inventory level come from the reduction in inventory costs. Note that the supply chain process is approximately two years from the time of design to the time of delivery, which imply costly storage costs. Reducing demand uncertainty can reduce storage costs.
+4. Postponement reduces pressures on productions at Obersport, and helps Obersport to meet retailer's demands/maintain good relationships with retailers.  
+=======
+In general, tailored postponement reduces expected under and over stocking, which increases expected profits. In our case, the cost of understocking is zero and the cost of overstocking is high. The cost of overstocking will decrease for each style. 
+
+To elaborate, the cost savings from reducing the number of overstocked goods materialises from reducing the amount of excess goods sold at large discounts.
+>>>>>>> 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
+>>>>>>> 4ff86e6d845a44dc9f4898c0a873b15dfb3d5fae
 
 Additional savings from reducing inventory level come from the reduction in inventory costs. Note that the supply chain process is approximately two years from the time of design to the time of delivery, which imply costly storage costs. Reducing demand uncertainty can reduce storage costs.
 
@@ -448,6 +477,7 @@ Postponement reduces pressures on productions at Obersport, and helps Obersport 
 
 ## Short Term
 
+<<<<<<< HEAD
 <<<<<<< 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
 "Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". Apart from profit, this implies that trading relationships with retailers and quality of the products are important to the success of the company. Another consideration to take into account is trade relations between countries. Profit, quality, relationships, and economics are four criteria that Obermeyer should use to gauge which factories to source their products from. 
 
@@ -457,6 +487,17 @@ From the text, "Obermeyer competed by offering an excellent price/value relation
 
 Objectively, the lower minimum requirement from Hong Kong factories yields a higher expected profit for Obermeyer. Based on the company's values, product quality, worker's conditions and delivery reliability, products sourced from Hong Kong are better. Although labour costs are more expensive, the overall expected profit is higher. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes and there is no risk of suffering from the import quota set by the US.
 >>>>>>> Checked for typos, and added/condensed and clarified some of the end parts.:BS1808_Group_Project_1_SO_Group_X.Rmd
+=======
+<<<<<<< HEAD:BS1808_Group_Project_1_SO_Group_X.Rmd
+From the text, "Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". Apart from profit, this implies that trading relationships with retailers and quality of the products are important to the success of the company. Another consideration to take into account are economic trade relations between countries.Profit, quality, relationships, and economics are four criteria that Obermeyer should use to gauge which factories to source their products from. 
+
+Objectively, the lower minimum requirement from Hong Kong factories yields a higher expected profit for Obermeyer. Based on the company's values, product quality, worker's conditions and delivery reliability, products sourced from Hong Kong are better. Although labour costs are more expensive, the overall expected profit is higher. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes and there is no risk of suffering from the import quota set by the US.
+=======
+"Obermeyer competed by offering an excellent price/value relationship, where value was defined as both functionality and style". Apart from profit, this implies that trading relationships with retailers and quality of the products are important to the success of the company. Another consideration to take into account is trade relations between countries. Profit, quality, relationships, and economics are four criteria that Obermeyer should use to gauge which factories to source their products from. 
+
+Objectively, the lower minimum requirement from Hong Kong factories yields a higher expected profit for Obermeyer. Based on the company's values, product quality, worker's conditions and delivery reliability, products sourced from Hong Kong are better. Although labour costs are more expensive, the overall expected profit is higher. When producing in Hong Kong, Obersport are better at dealing with uncertainty and are more likely to meet deadlines due to shorter production lines. In the short term, Hong Kong factories are better at managing inventory risks, responding to changes, and there is no risk of suffering from the import quota set by the US.
+>>>>>>> 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
+>>>>>>> 4ff86e6d845a44dc9f4898c0a873b15dfb3d5fae
 
 Moreover, if Wally adopts tailored postponement, this makes Hong Kong's flexibility, quality control and reliability more desirable for managing this process than China.
 
@@ -464,11 +505,19 @@ Moreover, if Wally adopts tailored postponement, this makes Hong Kong's flexibil
 
 In the long term, it may be possible to take advantage of lower costs from producing in China if other risks reduce. Meaning if conditions change; when the China factories become better at dealing with uncertainty, and the US decides to change its regulations. If Obermeyer continues to grow with popularity and receives larger orders, then it should consider producing larger quantities through China. 
 
+<<<<<<< HEAD
 <<<<<<< 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
 It may be possible that larger and less volatile products could be made in China, and higher volatility demand styles and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can be used as a back up to reduce losses by producing more. This of course assumes non-binding minimum order constraints, this would naturally be doable when the company grows and has more sales.
 =======
 It may be possible that large and less volatile products be made in China, and higher volitility demand sytles and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can be used as a back up to reduce losses by producing more. This of course assumes non-binding minimum order constraints, this would naturally be doable when the company grows and has more sales.
 >>>>>>> Checked for typos, and added/condensed and clarified some of the end parts.:BS1808_Group_Project_1_SO_Group_X.Rmd
+=======
+<<<<<<< HEAD:BS1808_Group_Project_1_SO_Group_X.Rmd
+It may be possible that large and less volatile products be made in China, and higher volitility demand sytles and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can be used as a back up to reduce losses by producing more. This of course assumes non-binding minimum order constraints, this would naturally be doable when the company grows and has more sales.
+=======
+It may be possible that larger and less volatile products could be made in China, and higher volatility demand styles and tailored postponement orders be made through the Hong Kong factories. This allows each factory to play to their own advantages. If products from China fail to reach the US market due to the laws, Hong Kong factories can be used as a back up to reduce losses by producing more. This of course assumes non-binding minimum order constraints, this would naturally be doable when the company grows and has more sales.
+>>>>>>> 573c0882dc0099ce5316fb61328463899cab646b:BS1808_Group_Project_1_SO_Group_11.Rmd
+>>>>>>> 4ff86e6d845a44dc9f4898c0a873b15dfb3d5fae
 
 ## Conclusion
 
