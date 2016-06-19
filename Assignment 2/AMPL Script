@@ -1,0 +1,19 @@
+AMPL Script
+
+#make sure you are in the right directory
+
+model q1biopharma.mod;
+solve;
+
+display Qhbl,Qhbe,Qhba,Qhbj,Qhbm,Qhbu;
+display Qrbl,Qrbe,Qrba,Qrbj,Qrbm,Qrbu;
+display Qhgl,Qhge,Qhga,Qhgj,Qhgm,Qhgu;
+display Qrgl,Qrge,Qrga,Qrgj,Qrgm,Qrgu;
+display Qhil,Qhie,Qhia,Qhij,Qhim,Qhiu;
+display Qril,Qrie,Qria,Qrij,Qrim,Qriu;
+display Qhjl,Qhje,Qhja,Qhjj,Qhjm,Qhju;
+display Qrjl,Qrje,Qrja,Qrjj,Qrjm,Qrju;
+display Qhml,Qhme,Qhma,Qhmj,Qhmm,Qhmu;
+display Qrml,Qrme,Qrma,Qrmj,Qrmm,Qrmu;
+display Qhul,Qhue,Qhua,Qhuj,Qhum,Qhuu;
+display Qrul,Qrue,Qrua,Qruj,Qrum,Qruu;
