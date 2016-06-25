@@ -76,14 +76,9 @@ output <- read_excel("optim1.xlsx", sheet = "Sheet1")
 output
 
 ```
+The total cost for this new plan is USD1,372,432,000. The two plants who are serving their own regions in high quantities of chemicals are Germany and US, whereas the plants Brazil, Mexico and India are producing more evenly distributed quantities and serving at least two markets. 
 
-The total cost for this new plan is USD1,372,432,000.00. 
-
-Under this plan, the
-
-
-The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.00. 
-
+The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.
 
 
 Under this plan, the Latin America market is served by 
