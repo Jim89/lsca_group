@@ -1,3 +1,18 @@
+#display Qhbl,Qhbe,Qhba,Qhbj,Qhbm,Qhbu;
+#display Qrbl,Qrbe,Qrba,Qrbj,Qrbm,Qrbu;
+#display Qhgl,Qhge,Qhga,Qhgj,Qhgm,Qhgu;
+#display Qrgl,Qrge,Qrga,Qrgj,Qrgm,Qrgu;
+#display Qhil,Qhie,Qhia,Qhij,Qhim,Qhiu;
+#display Qril,Qrie,Qria,Qrij,Qrim,Qriu;
+#display Qhjl,Qhje,Qhja,Qhjj,Qhjm,Qhju;
+#display Qrjl,Qrje,Qrja,Qrjj,Qrjm,Qrju;
+#display Qhml,Qhme,Qhma,Qhmj,Qhmm,Qhmu;
+#display Qrml,Qrme,Qrma,Qrmj,Qrmm,Qrmu;
+#display Qhul,Qhue,Qhua,Qhuj,Qhum,Qhuu;
+#display Qrul,Qrue,Qrua,Qruj,Qrum,Qruu;
+
+
+
 #variables
 var Qhbl; #quantity highcal from plant brazil to region latin america
 var Qhbe;
@@ -84,6 +99,15 @@ var Qrum;
 var Qruu;
 
 #parameters
+
+#exchange rates
+
+param real:= 0.9358025;
+param euro:= 0.952862;
+param rupee:= 1.0548794;
+param yen:= 1.1045637;
+param peso:= 1.0747187;
+param usd:= 1;
 
 #import
 param import_l:=0.3;
@@ -206,10 +230,10 @@ var U2 binary;
 
 #objective function
 
+
 minimize costs: 
 	
-	0.8*B0*br_fc_all+0.2*br_fc_all
-	+0.8*B1*br_fc_hc+0.2*br_fc_hc
+	(0.8*B0*br_fc_all+0.2*br_fc_all+0.8*B1*br_fc_hc+0.2*br_fc_hc
 		+B1*Qhbl*(trans_br_l+br_vc_hc)*(1)
 		+B1*Qhbe*(trans_br_e+br_vc_hc)*(1+import_e)
 		+B1*Qhba*(trans_br_a+br_vc_hc)*(1+import_a)
@@ -223,26 +247,25 @@ minimize costs:
 		+B2*Qrba*(trans_br_a+br_vc_r)*(1+import_a)
 		+B2*Qrbj*(trans_br_j+br_vc_r)*(1+import_j)
 		+B2*Qrbm*(trans_br_m+br_vc_r)*(1+import_m)
-		+B2*Qrbu*(trans_br_u+br_vc_r)*(1+import_u)
+		+B2*Qrbu*(trans_br_u+br_vc_r)*(1+import_u))*0.9358025
 
-	+0.8*G0*ger_fc_all+0.2*ger_fc_all
-	+0.8*G1*ger_fc_hc+0.2*ger_fc_hc
+	+(0.8*G0*ger_fc_all+0.2*ger_fc_all+0.8*G1*ger_fc_hc+0.2*ger_fc_hc
 		+G1*Qhgl*(trans_ger_l+ger_vc_hc)*(1+import_l)
 		+G1*Qhge*(trans_ger_e+ger_vc_hc)*(1)
 		+G1*Qhga*(trans_ger_a+ger_vc_hc)*(1+import_a)
 		+G1*Qhgj*(trans_ger_j+ger_vc_hc)*(1+import_j)
 		+G1*Qhgm*(trans_ger_m+ger_vc_hc)*(1+import_m)
-		+G1*Qhgu*(trans_ger_u+ger_vc_hc)*(1+import_u)
+		+G1*Qhgu*(trans_ger_u+ger_vc_hc)*(1+import_u))*0.952862
 	
-	+0.8*G2*ger_fc_r+0.2*ger_fc_r
+	+(0.8*G2*ger_fc_r+0.2*ger_fc_r
 		+G2*Qrgl*(trans_ger_l+ger_vc_r)*(1+import_l)
 		+G2*Qrge*(trans_ger_e+ger_vc_r)*(1)
 		+G2*Qrga*(trans_ger_a+ger_vc_r)*(1+import_a)
 		+G2*Qrgj*(trans_ger_j+ger_vc_r)*(1+import_j)
 		+G2*Qrgm*(trans_ger_m+ger_vc_r)*(1+import_m)
-		+G2*Qrgu*(trans_ger_u+ger_vc_r)*(1+import_u)
+		+G2*Qrgu*(trans_ger_u+ger_vc_r)*(1+import_u))*1.0548794
 
-	+0.8*I0*ind_fc_all+0.2*ind_fc_all
+	+(0.8*I0*ind_fc_all+0.2*ind_fc_all
 	+0.8*I1*ind_fc_hc+0.2*ind_fc_hc
 		+I1*Qhil*(trans_ind_l+ind_vc_hc)*(1+import_l)
 		+I1*Qhie*(trans_ind_e+ind_vc_hc)*(1+import_e)
@@ -257,10 +280,9 @@ minimize costs:
 		+I2*Qria*(trans_ind_a+ind_vc_r)*(1)
 		+I2*Qrij*(trans_ind_j+ind_vc_r)*(1+import_j)
 		+I2*Qrim*(trans_ind_m+ind_vc_r)*(1+import_m)
-		+I2*Qriu*(trans_ind_u+ind_vc_r)*(1+import_u)
+		+I2*Qriu*(trans_ind_u+ind_vc_r)*(1+import_u))*1.0548794
 		
-	+0.8*J0*jap_fc_all+0.2*jap_fc_all
-	+0.8*J1*jap_fc_hc+0.2*jap_fc_hc
+	+(0.8*J0*jap_fc_all+0.2*jap_fc_all+0.8*J1*jap_fc_hc+0.2*jap_fc_hc
 		+J1*Qhjl*(trans_jap_l+jap_vc_hc)*(1+import_l)
 		+J1*Qhje*(trans_jap_e+jap_vc_hc)*(1+import_e)
 		+J1*Qhja*(trans_jap_a+jap_vc_hc)*(1+import_a)
@@ -274,10 +296,9 @@ minimize costs:
 		+J2*Qrja*(trans_jap_a+jap_vc_r)*(1+import_a)
 		+J2*Qrjj*(trans_jap_j+jap_vc_r)*(1)
 		+J2*Qrjm*(trans_jap_m+jap_vc_r)*(1+import_m)
-		+J2*Qrju*(trans_jap_u+jap_vc_r)*(1+import_u)
+		+J2*Qrju*(trans_jap_u+jap_vc_r)*(1+import_u))*1.0747187
 
-	+0.8*M0*mex_fc_all+0.2*mex_fc_all
-	+0.8*M1*mex_fc_hc+0.2*mex_fc_hc
+	+(0.8*M0*mex_fc_all+0.2*mex_fc_all+0.8*M1*mex_fc_hc+0.2*mex_fc_hc
 		+M1*Qhml*(trans_mex_l+mex_vc_hc)*(1+import_l)
 		+M1*Qhme*(trans_mex_e+mex_vc_hc)*(1+import_e)
 		+M1*Qhma*(trans_mex_a+mex_vc_hc)*(1+import_a)
@@ -291,10 +312,9 @@ minimize costs:
 		+M2*Qrma*(trans_mex_a+mex_vc_r)*(1+import_a)
 		+M2*Qrmj*(trans_mex_j+mex_vc_r)*(1+import_j)
 		+M2*Qrmm*(trans_mex_m+mex_vc_r)*(1)
-		+M2*Qrmu*(trans_mex_u+mex_vc_r)*(1+import_u)
+		+M2*Qrmu*(trans_mex_u+mex_vc_r)*(1+import_u))*1.0747187
 		
-	+0.8*U0*us_fc_all+0.2*us_fc_all
-	+0.8*U1*us_fc_hc+0.2*us_fc_hc
+	+0.8*U0*us_fc_all+0.2*us_fc_all+0.8*U1*us_fc_hc+0.2*us_fc_hc
 		+U1*Qhul*(trans_us_l+us_vc_hc)*(1+import_l)
 		+U1*Qhue*(trans_us_e+us_vc_hc)*(1+import_e)
 		+U1*Qhua*(trans_us_a+us_vc_hc)*(1+import_a)
@@ -309,6 +329,7 @@ minimize costs:
 		+U2*Qruj*(trans_us_j+us_vc_r)*(1+import_j)
 		+U2*Qrum*(trans_us_m+us_vc_r)*(1+import_m)
 		+U2*Qruu*(trans_us_u+us_vc_r)*(1);
+
 
 
 #contraints

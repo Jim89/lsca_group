@@ -98,7 +98,9 @@ Under this plan, the Latin America market is served by
 # Global Supply Network Structure
 
 ## Optimisation under options
-In restructuring its global supply network structure, BioPharma has to consider exchange rate fluctuations and the option of shutting down factories simultaneously. The options available to the network design team are:
+In restructuring its global supply network structure, BioPharma has to consider exchange rate fluctuations and the option of shutting down factories simultaneously. 
+
+The options available to the network design team are:
 
 1. Keep global network with its current structure and capabilities.
 2. Limiting the capability of some plants to producing only one chemical, where a plant is limited to producing only one chemical and it saves 80% of the fixed costs associated with the chemical that is no longer produced.
@@ -144,15 +146,16 @@ under the additional conditions of
 ##   Mexico (dbl), US (dbl)
 ```
 
+## Exchange Rates
+
+The exchange rates can affect the profit of the business. For example, the costs of doing business from a plant can be significantly lower due to weakened exchange rates. BioPharma can opt to redistribute production to different plants based on exchange rates. 
+
+A decision tree is used to calculate the expected return of each plant to see the effects of exchange rate on expected profits and if any of the plants should be closed. Assuming that the exchange rates in 2010 can fall or rise to any of the rates from 2004 to 2009 with equal probability, the following decision tree with expected costs is constructed: 
+
+From the decision tree
+
 
 # Are there any plant for which it may be worth adding a million kilogams of additional capacity at a fixed cost of £3million a year?
-
-
-Option 1: Run the optimisation again for each scenario and see which is the best option.
-
-Estimate exchange rates. 
-
-Option 2: use heuristics to argue for the best factory to add. 
 
 
 # Any recommendations made by the reduction of duties
