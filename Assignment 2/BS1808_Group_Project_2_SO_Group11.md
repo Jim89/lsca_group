@@ -16,13 +16,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(knitr)
-```
-
-```
-## Warning: package 'knitr' was built under R version 3.2.5
-```
-
-```r
 library(purrr)
 library(readxl)
 ```
@@ -50,7 +43,7 @@ __Decision Variables__
 
 __Objective Function__
 
-The objective functino above is adjusted as follows: using the Brazil plant as follows, the costs function associated to Brazil is
+The objective function above is adjusted as follows: using the Brazil plant as follows, the costs function associated to Brazil is
 
 minimise 
 
@@ -72,26 +65,30 @@ Biopharma should have utilised its resources in the following way:
 ```
 ## Source: local data frame [12 x 8]
 ## 
-##                 
-##            (chr)
-## 1  Latin America
-## 2             NA
-## 3         Europe
-## 4             NA
-## 5           Asia
-## 6             NA
-## 7          Japan
-## 8             NA
-## 9         Mexico
-## 10            NA
-## 11            US
-## 12            NA
-## Variables not shown: structure(c("Highcal", "Relax ", "Highcal", "Relax ",
-##   "Highcal", (chr), Brazil (dbl), Germany (dbl), India (dbl), Japan (dbl),
-##   Mexico (dbl), US (dbl)
+##                          Brazil Germany India Japan  Mexico      US
+##            (chr)   (chr)  (dbl)   (dbl) (dbl) (dbl)   (dbl)   (dbl)
+## 1  Latin America Highcal  7e+06 0.0e+00 0e+00 0e+00 0.0e+00 0.0e+00
+## 2             NA   Relax  7e+06 0.0e+00 0e+00 0e+00 0.0e+00 0.0e+00
+## 3         Europe Highcal  0e+00 1.5e+07 0e+00 0e+00 0.0e+00 0.0e+00
+## 4             NA   Relax  0e+00 1.0e+06 0e+00 0e+00 1.1e+07 0.0e+00
+## 5           Asia Highcal  0e+00 0.0e+00 5e+06 0e+00 0.0e+00 0.0e+00
+## 6             NA   Relax  0e+00 0.0e+00 3e+06 0e+00 0.0e+00 0.0e+00
+## 7          Japan Highcal  4e+06 0.0e+00 2e+06 1e+06 0.0e+00 0.0e+00
+## 8             NA   Relax  0e+00 0.0e+00 8e+06 0e+00 0.0e+00 0.0e+00
+## 9         Mexico Highcal  0e+00 0.0e+00 0e+00 0e+00 3.0e+06 0.0e+00
+## 10            NA   Relax  0e+00 0.0e+00 0e+00 0e+00 3.0e+06 0.0e+00
+## 11            US Highcal  0e+00 0.0e+00 0e+00 0e+00 1.3e+07 5.0e+06
+## 12            NA   Relax  0e+00 0.0e+00 0e+00 0e+00 0.0e+00 1.7e+07
 ```
 
-The total cost for this new plan is USD1,372,432,000.00. The Japanese factory should have been idled because it was only producing 100,000 units of Highcal and supply this locally. The second plant to consider closing is the Germany plant that is producing 1.5mil and 1mil units of Highcal and Relax respectively. The production of these units can be shifted to other plants, even if costs are not minimised based on the formula above. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.00.
+The total cost for this new plan is USD1,372,432,000.00. 
+
+Under this plan, the
+
+
+The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.00. 
+
+
 
 Under this plan, the Latin America market is served by 
 
@@ -108,7 +105,9 @@ The options available to the network design team are:
 
 Assuming that demand in 2010 is stable and is the same as in 2009: the new objective function is as follows:
 
-minimise $(0.8B_0+0.2).F_{all,Brazil}+(0.8B_1+0.2).F_{Brazil,Highcal}+B_1*\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
+minimise $(0.8B_0+0.2).F_{all,Brazil}+$
+$(0.8B_1+0.2).F_{Brazil,Highcal}+\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
+$+(0.8B_2+0.2).F_{Brazil,Relax}+\sum_{k=1}^6 Q_{Relax,Brazil,k}.(V_{Relax,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
 
 where 
 
@@ -120,6 +119,8 @@ under the additional conditions of
 
 * $B_0 \geq B_1$, so that no Highcal is produced when the factory is shut
 * $B_0 \geq B_2$, so that no Relax is produced when the factory is shut
+* $MB_1 \geq \sum_{k=1}^6 Q_{Highcal,Brazil,k}$, so that no highcal is produced when the facilities are absent.
+* $MB_2 \geq \sum_{k=1}^6 Q_{Relax,Brazil,k}$, so that no Relax is produced when the facilities are absent.
 
 ## Results
 
@@ -127,23 +128,20 @@ under the additional conditions of
 ```
 ## Source: local data frame [12 x 8]
 ## 
-##                 
-##            (chr)
-## 1  Latin America
-## 2             NA
-## 3         Europe
-## 4             NA
-## 5           Asia
-## 6             NA
-## 7          Japan
-## 8             NA
-## 9         Mexico
-## 10            NA
-## 11            US
-## 12            NA
-## Variables not shown: structure(c("Highcal", "Relax ", "Highcal", "Relax ",
-##   "Highcal", (chr), Brazil (dbl), Germany (dbl), India (dbl), Japan (dbl),
-##   Mexico (dbl), US (dbl)
+##                           Brazil Germany India Japan Mexico    US
+##            (chr)   (chr)   (dbl)   (dbl) (dbl) (dbl)  (dbl) (dbl)
+## 1  Latin America Highcal 0.0e+00 0.0e+00 0e+00 0e+00  7e+06     0
+## 2             NA   Relax 0.0e+00 7.0e+06 0e+00 0e+00  0e+00     0
+## 3         Europe Highcal 0.0e+00      NA 0e+00 8e+06  7e+06     0
+## 4             NA   Relax 0.0e+00 1.2e+07 0e+00 0e+00  0e+00     0
+## 5           Asia Highcal 0.0e+00 0.0e+00 3e+06 2e+06  0e+00     0
+## 6             NA   Relax 0.0e+00 3.0e+06 0e+00 0e+00  0e+00     0
+## 7          Japan Highcal 0.0e+00 0.0e+00 7e+06 0e+00  0e+00     0
+## 8             NA   Relax 0.0e+00 8.0e+06 0e+00 0e+00  0e+00     0
+## 9         Mexico Highcal 0.0e+00 0.0e+00 3e+06 0e+00  0e+00     0
+## 10            NA   Relax 1.0e+06 2.0e+06 0e+00 0e+00  0e+00     0
+## 11            US Highcal 0.0e+00 1.3e+07 5e+06 0e+00  0e+00     0
+## 12            NA   Relax 1.7e+07 0.0e+00 0e+00 0e+00  0e+00     0
 ```
 
 ## Exchange Rates
@@ -155,7 +153,7 @@ A decision tree is used to calculate the expected return of each plant to see th
 From the decision tree
 
 
-# Are there any plant for which it may be worth adding a million kilogams of additional capacity at a fixed cost of £3million a year?
+# Are there any plant for which it may be worth adding a million kilogams of additional capacity at a fixed cost of Â£3million a year?
 
 
 # Any recommendations made by the reduction of duties

@@ -52,7 +52,7 @@ __Decision Variables__
 
 __Objective Function__
 
-The objective functino above is adjusted as follows: using the Brazil plant as follows, the costs function associated to Brazil is
+The objective function above is adjusted as follows: using the Brazil plant as follows, the costs function associated to Brazil is
 
 minimise 
 
@@ -101,7 +101,9 @@ The options available to the network design team are:
 
 Assuming that demand in 2010 is stable and is the same as in 2009: the new objective function is as follows:
 
-minimise $(0.8B_0+0.2).F_{all,Brazil}+(0.8B_1+0.2).F_{Brazil,Highcal}+B_1*\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
+minimise $(0.8B_0+0.2).F_{all,Brazil}+$
+$(0.8B_1+0.2).F_{Brazil,Highcal}+\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
+$+(0.8B_2+0.2).F_{Brazil,Relax}+\sum_{k=1}^6 Q_{Relax,Brazil,k}.(V_{Relax,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
 
 where 
 
@@ -113,6 +115,8 @@ under the additional conditions of
 
 * $B_0 \geq B_1$, so that no Highcal is produced when the factory is shut
 * $B_0 \geq B_2$, so that no Relax is produced when the factory is shut
+* $MB_1 \geq \sum_{k=1}^6 Q_{Highcal,Brazil,k}$, so that no highcal is produced when the facilities are absent.
+* $MB_2 \geq \sum_{k=1}^6 Q_{Relax,Brazil,k}$, so that no Relax is produced when the facilities are absent.
 
 ## Results
 
