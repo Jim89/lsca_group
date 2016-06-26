@@ -1,6 +1,7 @@
 AMPL Script
 
 #make sure you are in the right directory
+# for jon  cd 'C:\Users\user\Documents\lsca_group\Assignment 2';
 
 model q1biopharma.mod;
 solve;
@@ -18,7 +19,10 @@ display Qrml,Qrme,Qrma,Qrmj,Qrmm,Qrmu;
 display Qhul,Qhue,Qhua,Qhuj,Qhum,Qhuu;
 display Qrul,Qrue,Qrua,Qruj,Qrum,Qruu;
 
-# or second optimisation:
+# second optimisation:
+
+option solver cplex;
+option cplex_options 'sensitivity';
 model q2biopharma.mod;
 solve;
 
