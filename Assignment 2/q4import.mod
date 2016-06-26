@@ -86,12 +86,12 @@ var Qruu;
 #parameters
 
 #import
-param import_l:=0.3;
-param import_e:=0.03;
-param import_a:=0.27;
-param import_j:=0.06;
-param import_m:=0.35;
-param import_u:=0.4;
+param import_l:=0;
+param import_e:=0;
+param import_a:=0;
+param import_j:=0;
+param import_m:=0;
+param import_u:=0;
 
 #brazil fixed, variable costs
 param br_fc_all := 20000000;

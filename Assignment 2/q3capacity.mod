@@ -204,6 +204,16 @@ var U0 binary;
 var U1 binary;
 var U2 binary;
 
+var AB binary; #additional capacity constant
+var AG binary;
+var AI binary;
+var AJ binary;
+var AM binary;
+var AU binary;
+
+
+subject to oneonly: AB+AG+AI+AJ+AM+AU<=1;
+
 #objective function
 
 minimize costs: 
@@ -308,9 +318,15 @@ minimize costs:
 		+Qrua*(trans_us_a+us_vc_r)*(1+import_a)
 		+Qruj*(trans_us_j+us_vc_r)*(1+import_j)
 		+Qrum*(trans_us_m+us_vc_r)*(1+import_m)
-		+Qruu*(trans_us_u+us_vc_r)*(1);
-
-
+		+Qruu*(trans_us_u+us_vc_r)*(1)
+		
+	+ AB*3000000
+	+ AG*3000000
+	+ AI*3000000
+	+ AJ*3000000
+	+ AM*3000000
+	+ AU*3000000;
+	
 #contraints
 #demands by region = sales made in 2009 = demand = supply
 #assume that any factory can ship to any region
@@ -329,17 +345,17 @@ subject to u_r_demand: Qrbu+Qrgu+Qriu+Qrju+Qrmu+Qruu>=17000000;
 
 #capacity limits
 subject to br_capacity: Qhbl+ Qhbe+ Qhba+ Qhbj+ Qhbm+ Qhbu+ 
-						Qrbl+ Qrbe+ Qrba+ Qrbj+ Qrbm+ Qrbu<=18000000;
+						Qrbl+ Qrbe+ Qrba+ Qrbj+ Qrbm+ Qrbu<=18000000 + AB*1000000;
 subject to ger_capacity:Qhgl+ Qhge+ Qhga+ Qhgj+ Qhgm+ Qhgu+
-						Qrgl+ Qrge+ Qrga+ Qrgj+ Qrgm+ Qrgu<=45000000;
+						Qrgl+ Qrge+ Qrga+ Qrgj+ Qrgm+ Qrgu<=45000000 + AG*1000000;
 subject to ind_capacity:Qhil+ Qhie+ Qhia+ Qhij+ Qhim+ Qhiu+ 
-						Qril + Qrie+ Qria+ Qrij+ Qrim+ Qriu<=18000000;
+						Qril + Qrie+ Qria+ Qrij+ Qrim+ Qriu<=18000000 + AI*1000000;
 subject to jap_capacity:Qhjl+ Qhje+ Qhja+ Qhjj+ Qhjm+ Qhju+ 
-						Qrjl + Qrje+ Qrja+ Qrjj+ Qrjm+ Qrju<=10000000;
+						Qrjl + Qrje+ Qrja+ Qrjj+ Qrjm+ Qrju<=10000000 + AJ*1000000;
 subject to mex_capacity:Qhml+ Qhme+ Qhma+ Qhmj+ Qhmm+ Qhmu+ 
-						Qrml + Qrme+ Qrma+ Qrmj+ Qrmm+ Qrmu<=30000000;
+						Qrml + Qrme+ Qrma+ Qrmj+ Qrmm+ Qrmu<=30000000 + AM*1000000;
 subject to us_capacity: Qhul+ Qhue+ Qhua+ Qhuj+ Qhum+ Qhuu+ 
-						Qrul + Qrue+ Qrua+ Qruj+ Qrum+ Qruu<=22000000;
+						Qrul + Qrue+ Qrua+ Qruj+ Qrum+ Qruu<=22000000 + AU*1000000;
 
 
 #switch for plants

@@ -186,7 +186,7 @@ param us_fc_all := 21000000;
 param us_fc_hc:= 5000000;
 param us_fc_r:= 5000000;
 param us_vc_hc:= 8.6; #raw material+production cost for highcal($/kg)
-param us_vc_r:= 11.1; #raw material+production cost for relax($/kg)
+param us_vc_r:= 11; #raw material+production cost for relax($/kg)
 
 # us transport costs
 param trans_us_l:= 0.45; #USD/kg

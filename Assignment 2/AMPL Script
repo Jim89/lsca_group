@@ -18,7 +18,6 @@ display Qrml,Qrme,Qrma,Qrmj,Qrmm,Qrmu;
 display Qhul,Qhue,Qhua,Qhuj,Qhum,Qhuu;
 display Qrul,Qrue,Qrua,Qruj,Qrum,Qruu;
 
-
 # or second optimisation:
 model q2biopharma.mod;
 solve;
@@ -29,6 +28,8 @@ display I0, I1, I2;
 display J0, J1, J2; 
 display M0, M1, M2; 
 display U0, U1, U2; 
+
+display AB, AG, AI, AJ, AM, AU;
 
 
 

@@ -17,6 +17,13 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(knitr)
+```
+
+```
+## Warning: package 'knitr' was built under R version 3.2.5
+```
+
+```r
 library(purrr)
 library(readxl)
 ```
@@ -27,11 +34,21 @@ library(readxl)
 
 The overarching goal of this project is to optimise inventory and redesign the supply chain network of BioPharma, a chemical company. We use a combination of optimisation, heuristics and decision trees to evaluate improvements in order to make recommendations for courses of actions so that the company can cut costs and stay competitive in the global market.
 
+In 2009, all six of BioPharma's plants maintained its capabilities for producing both Highcal and Relax; these chemicals can be shipped to any other parts of the world with additional costs attached. Furthermore, BioPharma faces import duties for all foreign goods entering a country, independent from plant origin. 
+
+Based on the information given in tables, it is observed that
+
+* Plants with higher fixed costs are Germany, Mexico and Japan.
+* Plants with higher variable costs are Germany and Japan.
+* Mexico and German plants have greater capacities. However, in 2009 not all plants operated at full capacitiy. Some regions such as US imported Highcal and Germany imported Relax from other plants.
+* The plants in Mexico, US, Brazil and India is operating at full capacity. 
+* Import tax into Europe, Japan and US is very low.
+
 # Wiser on Hindsight: What could have been done in 2009
 
-In 2009, all six of BioPharma's plants maintained its capabilities for producing both Highcal and Relax; these chemicals can be shipped to any other parts of the world with additional costs attached. Furthermore, BioPharma faces import duties for all foreign goods entering a country, independent from plant origin. Under these conditions, the following optimisation problem is constructed to identify a more efficient use of resources.
-
 ## The Optimisation Problem
+
+Under the above conditions, the following optimisation problem is constructed to identify a more efficient use of resources.
 
 __Decision Variables__
 
@@ -92,10 +109,13 @@ kable(output,
                     "Japan", 
                     "Mexico", 
                     "USA"),
-      format.args = list(big.mark = ","))
+      format.args = list(big.mark = ","),
+      caption = "Table 1: Optimal Production Output in 2009")
 ```
 
 
+
+Table: Table 1: Optimal Production Output in 2009
 
 Region          Chemical       Brazil      Germany       India       Japan       Mexico          USA
 --------------  ---------  ----------  -----------  ----------  ----------  -----------  -----------
@@ -114,23 +134,22 @@ US              Relax               0            0           0           0      
 
 The total cost for this new plan is USD1,372,432,000. The two plants who are serving their own regions in high quantities of chemicals are Germany and US, whereas the plants Brazil, Mexico and India are producing more evenly distributed quantities and serving at least two markets. 
 
-The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.
+BioPharma could have implemented production as shown above, at the cost of  USD1,337,340,000. The two plants serving their own regions in high quantities of chemicals are Germany and US, whereas the plants Brazil, Mexico and India are producing more evenly distributed quantities and serving at least two markets. 
 
+The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the general plant fixed costs will be incurred and the cost of this new plan will be USD1,325,340,000.
 
-Under this plan, the Latin America market is served by 
+The results from the optimisation corroborates the serious consideration of shutting down the Japanese plant. 
 
-# Global Supply Network Structure
+# Looking ahead: Restructing the Global Supply Network
 
 ## Optimisation under options
-In restructuring its global supply network structure, BioPharma has to consider exchange rate fluctuations and the option of shutting down factories simultaneously. 
-
-The options available to the network design team are:
+In restructuring its global supply network structure, BioPharma has to consider exchange rate fluctuations and the option of shutting down factories simultaneously. The options available to the network design team are:
 
 1. Keep global network with its current structure and capabilities.
 2. Limiting the capability of some plants to producing only one chemical, where a plant is limited to producing only one chemical and it saves 80% of the fixed costs associated with the chemical that is no longer produced.
 3. Closing down some plants, where closing down a plant eliminates all variable costs and saves 80% of annual fixed costs.
 
-Assuming that demand in 2010 is stable and is the same as in 2009: the new objective function is as follows:
+Assuming that demand in 2010 is stable and will be the same as in 2009: the new objective function is as follows:
 
 minimise $(0.8B_0+0.2).F_{all,Brazil}+$
 $(0.8B_1+0.2).F_{Brazil,Highcal}+\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).( \textbf{1} +I_{Brazil,k})$
@@ -178,40 +197,173 @@ kable(output2,
                     "Japan", 
                     "Mexico", 
                     "USA"),
-      format.args = list(big.mark = ","))
+      format.args = list(big.mark = ","),
+      caption = "Table 2: Optimal Production Output with new Supply Network Design for 2010")
 ```
 
 
 
-Region          Chemical        Brazil      Germany       India       Japan      Mexico   USA
---------------  ---------  -----------  -----------  ----------  ----------  ----------  ----
-Latin America   Highcal              0            0           0           0   7,000,000     0
-Latin America   Relax                0    7,000,000           0           0           0     0
-Europe          Highcal              0            0           0   8,000,000   7,000,000     0
-Europe          Relax                0   12,000,000           0           0           0     0
-Asia            Highcal              0            0   3,000,000   2,000,000           0     0
-Asia            Relax                0    3,000,000           0           0           0     0
-Japan           Highcal              0            0   7,000,000           0           0     0
-Japan           Relax                0    8,000,000           0           0           0     0
-Mexico          Highcal              0            0   3,000,000           0           0     0
-Mexico          Relax        1,000,000    2,000,000           0           0           0     0
-US              Highcal              0   13,000,000   5,000,000           0           0     0
-US              Relax       17,000,000            0           0           0           0     0
+Table: Table 2: Optimal Production Output with new Supply Network Design for 2010
+
+Region          Chemical       Brazil      Germany       India   Japan       Mexico          USA
+--------------  ---------  ----------  -----------  ----------  ------  -----------  -----------
+Latin America   Highcal     7,000,000            0           0       0            0            0
+Latin America   Relax       7,000,000            0           0       0            0            0
+Europe          Highcal             0   15,000,000           0       0            0            0
+Europe          Relax       1,000,000            0           0       0   11,000,000            0
+Asia            Highcal             0            0   5,000,000       0            0            0
+Asia            Relax               0            0   3,000,000       0            0            0
+Japan           Highcal     3,000,000    2,000,000   2,000,000       0            0            0
+Japan           Relax               0            0   8,000,000       0            0            0
+Mexico          Highcal             0            0           0       0    3,000,000            0
+Mexico          Relax               0            0           0       0    3,000,000            0
+US              Highcal             0            0           0       0   13,000,000    5,000,000
+US              Relax               0            0           0       0            0   17,000,000
+
+Based on the optimisation based on monetary criteria, BioPharma should compeletely shut down its Japanese plant. This is may possibly be attributed to the high fixed costs and low capacity of 10 million units incurred by the plant. Unless the high costs are justified by the plant being a technological leader and will be able to bring other external benefits in the long term to BioPharma, the Japanese plant can be shut and the technology can be transferred to other functioning plants. As a result, the Japanese market's demand for Highcal will be fulfilled by Brazil, Germany and India and the market demand for Relax by India. From Figure 6-18, it is observed that in 2009 Japan is already importing chemicals from other plants as its total demand of 15mil units exceeds its capacity of 10mil units. Furthermore, the plant was only producing a meagre 2mil units with full operational costs. 
+
+In addition, it is suggested that Germany continue to produce only Highcal in the next year, and an extra 2 million kilograms for Japan. The other plants will continue to operate at full capacity with minor changes in the quantities of the chemicals. 
 
 ## Exchange Rates
 
-The exchange rates can affect the profit of the business. For example, the costs of doing business from a plant can be significantly lower due to weakened exchange rates. BioPharma can opt to redistribute production to different plants based on exchange rates. 
+The costs of doing business from a plant can be significantly lower due to weakened exchange rates. BioPharma as an international business will be greatly affected by these fluctuations and can opt to redistribute production to different plants based on exchange rates. The follow analysis is based on the assumption that BioPharma is a US company and is primarily interested in profits in US dollars as opposed to other currencies.
 
-A decision tree is used to calculate the expected return of each plant to see the effects of exchange rate on expected profits and if any of the plants should be closed. Assuming that the exchange rates in 2010 can fall or rise to any of the rates from 2004 to 2009 with equal probability, the following decision tree with expected costs is constructed: 
+A decision tree is used to assess the risk of these fluctuations and to calculate the expected return of each plant. Assuming that the exchange rates in 2010 can fall or rise to any of the rates from 2004 to 2009 with equal probability, the following decision tree with expected costs is constructed: 
 
-From the decision tree
+(insert picture of decision tree)
+
+### Analysis
+
+Exchange rates costs are expected to increase significantly at $30mil from Mexico and $12mil from India, and decrease $14mil from Brazil and $12mil from Germany. BioPharma faces a greater problem of rising costs from FX. In response, BioPharma can opt to shift Highcal production to Germany as it is not operating at full capacity. More specifically, Highcal exports to US can be managed by Germany. If necessary and if it becomes more cost effective due to weakening of exchange rates from Europe, Germany could open its Relax production capabilities to serve the European market for Relax. As for Brazil, it exports 1mil kg of Relax to Europe and 3mil kg of Highcal to Japan. Similarly, such productions can be shifted to other plants. 
+
+This situation shows that the German plant's unused capactiy may not be as ineffective. The German plant gives BioPharma the flexibility to cope with unexpected economic environments, while maintaining its technological advancements.
+
+Alternatively, these figures for the expected costs for each plant can be reintroduced into the optimisation problem in order to reestimate the supply chain network. BioPharma can also hedge against exchange rate risks through financial intermediaries.
+
+#Scenario: Expansion Options
+
+## The Optimisation Problem
+
+In considering such options, this changes the optimisation by having: 
+
+1. Additional binary variables of AB ($\textbf{A}$dditional capacity for $\textbf{B}$razil),  $AG$,  $AI$,  $AJ$,  $AM$ and  $AU$ to function as switches to allocate capacities for one factory. 
+2. Constraint where additional capacity can only be added to one plant: $AB+AG+AI+AJ+AM+AU
+<=1$
+
+## Results
 
 
-# Are there any plant for which it may be worth adding a million kilogams of additional capacity at a fixed cost of £3million a year?
+```r
+# Get raw demand data
+output3 <- read_excel("optim1.xlsx", sheet = "Sheet3") %>% 
+            # Set column names as the first two are not present in the Excel
+            set_names(c("region", 
+                        "chem", 
+                        "brazil", 
+                        "germany", 
+                        "india", 
+                        "japan", 
+                        "mex", 
+                        "us")) %>%
+            # Fill in missing values with the value from the previous row for the 
+            # region names which are missing
+            mutate(region = zoo::na.locf(region))
+
+# Pretty print the output
+kable(output3,
+      col.names = c("Region", 
+                    "Chemical", 
+                    "Brazil", 
+                    "Germany", 
+                    "India", 
+                    "Japan", 
+                    "Mexico", 
+                    "USA"),
+      format.args = list(big.mark = ","),
+      caption = "Table 3: Optimal Production Output with new Supply Network Design for 2010 with additional capacity")
+```
 
 
-# Any recommendations made by the reduction of duties
 
+Table: Table 3: Optimal Production Output with new Supply Network Design for 2010 with additional capacity
+
+Region          Chemical       Brazil      Germany       India   Japan       Mexico          USA
+--------------  ---------  ----------  -----------  ----------  ------  -----------  -----------
+Latin America   Highcal     7,000,000            0           0       0            0            0
+Latin America   Relax       7,000,000            0           0       0            0            0
+Europe          Highcal             0   15,000,000           0       0            0            0
+Europe          Relax       1,000,000            0           0       0   11,000,000            0
+Asia            Highcal             0            0   5,000,000       0            0            0
+Asia            Relax               0            0   3,000,000       0            0            0
+Japan           Highcal     3,000,000    2,000,000   2,000,000       0            0            0
+Japan           Relax               0            0   8,000,000       0            0            0
+Mexico          Highcal             0            0           0       0    3,000,000            0
+Mexico          Relax               0            0           0       0    3,000,000            0
+US              Highcal             0            0           0       0   13,000,000    6,000,000
+US              Relax               0            0           0       0            0   17,000,000
+
+
+Seeing that BioPharma is considering expanding one of its plant's capacity by 1mil kilograms at a cost of $3 million a year, they should expand the US plant. With the new capacity, it will produce an extra 1mil kilograms of Highcal for the domestic market, where Mexico will supply 1mil kilogram less to the US market. The total cost for this plan is $1,334,260,000, which is $3million dollars less than the orginal plan of $1,337,340,000. Hence, BioPharma will experience the greatest economies of scale if the money were invested in the US plant. 
+
+Furthermore, seeing that this move reduces Mexico's production load for 2010, BioPharma will be safer from the changing exchange rates. 
+
+# Scenario: A reduction of duties
+
+## Results
+
+Under the assumption that all import tariffs are removed, the new costs for BioPharma will be at USD1,267,200,000, which is more than $50mil less than all the other scenarios above. This further emphasises that import tariffs heavily affects the costs of production and distribution of the chemicals to different regions. 
+
+
+```r
+# Get raw demand data
+output4 <- read_excel("optim1.xlsx", sheet = "Sheet4") %>% 
+            # Set column names as the first two are not present in the Excel
+            set_names(c("region", 
+                        "chem", 
+                        "brazil", 
+                        "germany", 
+                        "india", 
+                        "japan", 
+                        "mex", 
+                        "us")) %>%
+            # Fill in missing values with the value from the previous row for the 
+            # region names which are missing
+            mutate(region = zoo::na.locf(region))
+
+# Pretty print the output
+kable(output4,
+      col.names = c("Region", 
+                    "Chemical", 
+                    "Brazil", 
+                    "Germany", 
+                    "India", 
+                    "Japan", 
+                    "Mexico", 
+                    "USA"),
+      format.args = list(big.mark = ","),
+      caption = "Table 4: Optimal Production Output for 2010 without import tariffs")
+```
+
+
+
+Table: Table 4: Optimal Production Output for 2010 without import tariffs
+
+Region          Chemical       Brazil      Germany       India   Japan       Mexico          USA
+--------------  ---------  ----------  -----------  ----------  ------  -----------  -----------
+Latin America   Highcal     7,000,000            0           0       0            0            0
+Latin America   Relax       7,000,000            0           0       0            0            0
+Europe          Highcal             0   13,000,000           0       0    2,000,000            0
+Europe          Relax               0            0   7,000,000       0            0    5,000,000
+Asia            Highcal     1,000,000    4,000,000           0       0            0            0
+Asia            Relax               0            0   3,000,000       0            0            0
+Japan           Highcal             0            0           0       0    7,000,000            0
+Japan           Relax               0            0   8,000,000       0            0            0
+Mexico          Highcal     3,000,000            0           0       0    3,000,000            0
+Mexico          Relax               0            0           0       0            0            0
+US              Highcal             0            0           0       0   18,000,000            0
+US              Relax               0            0           0       0            0   17,000,000
+
+Without import tariffs, optimal production quantity will depend more heavily on actual costs of production and transportation. We continue to see Germany increasing its production on Highcal only. It is observed that all plants except Brazil specialising in producing one chemical only, and each plant producing for a region outside of its own. Moreover, each country's demand is supplied by fewer plants.
 
 # Not 100% yield
 
