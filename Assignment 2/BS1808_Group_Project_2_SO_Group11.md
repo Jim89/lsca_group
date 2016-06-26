@@ -9,7 +9,8 @@ Jone Leung, Somto Okoye, Valentin Poirelle, Jin Anne Lee, Jim Leach, Niccolo Val
 
 ```r
 # Set default knitr options
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.align = "center",
+                      scipen = 999)
 
 # Load packages
 library(dplyr)
@@ -62,24 +63,55 @@ __Constraints__
 Biopharma should have utilised its resources in the following way:
 
 
+```r
+# Set scipen
+options(scipen = 999)
+
+# Get raw demand data
+output <- read_excel("optim1.xlsx", sheet = "Sheet1") %>% 
+            # Set column names as the first two are not present in the Excel
+            set_names(c("region", 
+                        "chem", 
+                        "brazil", 
+                        "germany", 
+                        "india", 
+                        "japan", 
+                        "mex", 
+                        "us")) %>%
+            # Fill in missing values with the value from the previous row for the 
+            # region names which are missing
+            mutate(region = zoo::na.locf(region))
+
+# Pretty print the output
+kable(output,
+      col.names = c("Region", 
+                    "Chemical", 
+                    "Brazil", 
+                    "Germany", 
+                    "India", 
+                    "Japan", 
+                    "Mexico", 
+                    "USA"),
+      format.args = list(big.mark = ","))
 ```
-## Source: local data frame [12 x 8]
-## 
-##                          Brazil Germany India Japan  Mexico      US
-##            (chr)   (chr)  (dbl)   (dbl) (dbl) (dbl)   (dbl)   (dbl)
-## 1  Latin America Highcal  7e+06 0.0e+00 0e+00 0e+00 0.0e+00 0.0e+00
-## 2             NA   Relax  7e+06 0.0e+00 0e+00 0e+00 0.0e+00 0.0e+00
-## 3         Europe Highcal  0e+00 1.5e+07 0e+00 0e+00 0.0e+00 0.0e+00
-## 4             NA   Relax  0e+00 1.0e+06 0e+00 0e+00 1.1e+07 0.0e+00
-## 5           Asia Highcal  0e+00 0.0e+00 5e+06 0e+00 0.0e+00 0.0e+00
-## 6             NA   Relax  0e+00 0.0e+00 3e+06 0e+00 0.0e+00 0.0e+00
-## 7          Japan Highcal  4e+06 0.0e+00 2e+06 1e+06 0.0e+00 0.0e+00
-## 8             NA   Relax  0e+00 0.0e+00 8e+06 0e+00 0.0e+00 0.0e+00
-## 9         Mexico Highcal  0e+00 0.0e+00 0e+00 0e+00 3.0e+06 0.0e+00
-## 10            NA   Relax  0e+00 0.0e+00 0e+00 0e+00 3.0e+06 0.0e+00
-## 11            US Highcal  0e+00 0.0e+00 0e+00 0e+00 1.3e+07 5.0e+06
-## 12            NA   Relax  0e+00 0.0e+00 0e+00 0e+00 0.0e+00 1.7e+07
-```
+
+
+
+Region          Chemical       Brazil      Germany       India       Japan       Mexico          USA
+--------------  ---------  ----------  -----------  ----------  ----------  -----------  -----------
+Latin America   Highcal     7,000,000            0           0           0            0            0
+Latin America   Relax       7,000,000            0           0           0            0            0
+Europe          Highcal             0   15,000,000           0           0            0            0
+Europe          Relax               0    1,000,000           0           0   11,000,000            0
+Asia            Highcal             0            0   5,000,000           0            0            0
+Asia            Relax               0            0   3,000,000           0            0            0
+Japan           Highcal     4,000,000            0   2,000,000   1,000,000            0            0
+Japan           Relax               0            0   8,000,000           0            0            0
+Mexico          Highcal             0            0           0           0    3,000,000            0
+Mexico          Relax               0            0           0           0    3,000,000            0
+US              Highcal             0            0           0           0   13,000,000    5,000,000
+US              Relax               0            0           0           0            0   17,000,000
+
 The total cost for this new plan is USD1,372,432,000. The two plants who are serving their own regions in high quantities of chemicals are Germany and US, whereas the plants Brazil, Mexico and India are producing more evenly distributed quantities and serving at least two markets. 
 
 The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.
@@ -120,24 +152,51 @@ under the additional conditions of
 ## Results
 
 
+```r
+# Get raw demand data
+output2 <- read_excel("optim1.xlsx", sheet = "Sheet2") %>% 
+            # Set column names as the first two are not present in the Excel
+            set_names(c("region", 
+                        "chem", 
+                        "brazil", 
+                        "germany", 
+                        "india", 
+                        "japan", 
+                        "mex", 
+                        "us")) %>%
+            # Fill in missing values with the value from the previous row for the 
+            # region names which are missing
+            mutate(region = zoo::na.locf(region))
+
+# Pretty print the output
+kable(output2,
+      col.names = c("Region", 
+                    "Chemical", 
+                    "Brazil", 
+                    "Germany", 
+                    "India", 
+                    "Japan", 
+                    "Mexico", 
+                    "USA"),
+      format.args = list(big.mark = ","))
 ```
-## Source: local data frame [12 x 8]
-## 
-##                           Brazil Germany India Japan Mexico    US
-##            (chr)   (chr)   (dbl)   (dbl) (dbl) (dbl)  (dbl) (dbl)
-## 1  Latin America Highcal 0.0e+00 0.0e+00 0e+00 0e+00  7e+06     0
-## 2             NA   Relax 0.0e+00 7.0e+06 0e+00 0e+00  0e+00     0
-## 3         Europe Highcal 0.0e+00      NA 0e+00 8e+06  7e+06     0
-## 4             NA   Relax 0.0e+00 1.2e+07 0e+00 0e+00  0e+00     0
-## 5           Asia Highcal 0.0e+00 0.0e+00 3e+06 2e+06  0e+00     0
-## 6             NA   Relax 0.0e+00 3.0e+06 0e+00 0e+00  0e+00     0
-## 7          Japan Highcal 0.0e+00 0.0e+00 7e+06 0e+00  0e+00     0
-## 8             NA   Relax 0.0e+00 8.0e+06 0e+00 0e+00  0e+00     0
-## 9         Mexico Highcal 0.0e+00 0.0e+00 3e+06 0e+00  0e+00     0
-## 10            NA   Relax 1.0e+06 2.0e+06 0e+00 0e+00  0e+00     0
-## 11            US Highcal 0.0e+00 1.3e+07 5e+06 0e+00  0e+00     0
-## 12            NA   Relax 1.7e+07 0.0e+00 0e+00 0e+00  0e+00     0
-```
+
+
+
+Region          Chemical        Brazil      Germany       India       Japan      Mexico   USA
+--------------  ---------  -----------  -----------  ----------  ----------  ----------  ----
+Latin America   Highcal              0            0           0           0   7,000,000     0
+Latin America   Relax                0    7,000,000           0           0           0     0
+Europe          Highcal              0            0           0   8,000,000   7,000,000     0
+Europe          Relax                0   12,000,000           0           0           0     0
+Asia            Highcal              0            0   3,000,000   2,000,000           0     0
+Asia            Relax                0    3,000,000           0           0           0     0
+Japan           Highcal              0            0   7,000,000           0           0     0
+Japan           Relax                0    8,000,000           0           0           0     0
+Mexico          Highcal              0            0   3,000,000           0           0     0
+Mexico          Relax        1,000,000    2,000,000           0           0           0     0
+US              Highcal              0   13,000,000   5,000,000           0           0     0
+US              Relax       17,000,000            0           0           0           0     0
 
 ## Exchange Rates
 
@@ -148,7 +207,7 @@ A decision tree is used to calculate the expected return of each plant to see th
 From the decision tree
 
 
-# Are there any plant for which it may be worth adding a million kilogams of additional capacity at a fixed cost of Â£3million a year?
+# Are there any plant for which it may be worth adding a million kilogams of additional capacity at a fixed cost of £3million a year?
 
 
 # Any recommendations made by the reduction of duties

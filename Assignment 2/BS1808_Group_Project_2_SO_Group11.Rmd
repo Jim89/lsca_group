@@ -18,7 +18,8 @@ output:
 
 ```{r prep, echo = TRUE, message=FALSE}
 # Set default knitr options
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.align = "center",
+                      scipen = 999)
 
 # Load packages
 library(dplyr)
@@ -71,11 +72,37 @@ __Constraints__
 Biopharma should have utilised its resources in the following way:
 
 ```{r show_output}
-# Get raw demand data
-output <- read_excel("optim1.xlsx", sheet = "Sheet1")
-output
+# Set scipen
+options(scipen = 999)
 
+# Get raw demand data
+output <- read_excel("optim1.xlsx", sheet = "Sheet1") %>% 
+            # Set column names as the first two are not present in the Excel
+            set_names(c("region", 
+                        "chem", 
+                        "brazil", 
+                        "germany", 
+                        "india", 
+                        "japan", 
+                        "mex", 
+                        "us")) %>%
+            # Fill in missing values with the value from the previous row for the 
+            # region names which are missing
+            mutate(region = zoo::na.locf(region))
+
+# Pretty print the output
+kable(output,
+      col.names = c("Region", 
+                    "Chemical", 
+                    "Brazil", 
+                    "Germany", 
+                    "India", 
+                    "Japan", 
+                    "Mexico", 
+                    "USA"),
+      format.args = list(big.mark = ","))
 ```
+
 The total cost for this new plan is USD1,372,432,000. The two plants who are serving their own regions in high quantities of chemicals are Germany and US, whereas the plants Brazil, Mexico and India are producing more evenly distributed quantities and serving at least two markets. 
 
 The Japanese factory should have been idled because it was only producing 1mil units of Highcal for the local supply. The production of 1million units can be shifted to the plant in India, who is already producing units of Highcal for the Japanese market. This allows BioPharma to save on fixed costs, even though it is not the optimal plan. If the Japanese fatory were to be idled, only the fixed costs will be incurred and the cost of this new plan will be USD1,360,932,000.
@@ -117,8 +144,31 @@ under the additional conditions of
 
 ```{r show_output2}
 # Get raw demand data
-output2 <- read_excel("optim1.xlsx", sheet = "Sheet2")
-output2
+output2 <- read_excel("optim1.xlsx", sheet = "Sheet2") %>% 
+            # Set column names as the first two are not present in the Excel
+            set_names(c("region", 
+                        "chem", 
+                        "brazil", 
+                        "germany", 
+                        "india", 
+                        "japan", 
+                        "mex", 
+                        "us")) %>%
+            # Fill in missing values with the value from the previous row for the 
+            # region names which are missing
+            mutate(region = zoo::na.locf(region))
+
+# Pretty print the output
+kable(output2,
+      col.names = c("Region", 
+                    "Chemical", 
+                    "Brazil", 
+                    "Germany", 
+                    "India", 
+                    "Japan", 
+                    "Mexico", 
+                    "USA"),
+      format.args = list(big.mark = ","))
 
 ```
 
