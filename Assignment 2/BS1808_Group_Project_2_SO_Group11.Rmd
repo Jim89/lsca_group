@@ -87,7 +87,7 @@ options(scipen = 999)
 # Get raw demand data
 output <- read_excel("optim1.xlsx", sheet = "Sheet1") %>% 
             # Set column names as the first two are not present in the Excel
-            set_names(c(" sale region", 
+            set_names(c("region", 
                         "chem", 
                         "brazil", 
                         "germany", 
@@ -101,7 +101,7 @@ output <- read_excel("optim1.xlsx", sheet = "Sheet1") %>%
 
 # Pretty print the output
 kable(output,
-      col.names = c("Region", 
+      col.names = c("Sale Region", 
                     "Chemical", 
                     "Brazil", 
                     "Germany", 
@@ -168,7 +168,7 @@ output2 <- read_excel("optim1.xlsx", sheet = "Sheet2") %>%
 
 # Pretty print the output
 kable(output2,
-      col.names = c("Region", 
+      col.names = c("Sale Region", 
                     "Chemical", 
                     "Brazil", 
                     "Germany", 
