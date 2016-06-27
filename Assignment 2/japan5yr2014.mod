@@ -1,18 +1,3 @@
-#display Qhbl,Qhbe,Qhba,Qhbj,Qhbm,Qhbu;
-#display Qrbl,Qrbe,Qrba,Qrbj,Qrbm,Qrbu;
-#display Qhgl,Qhge,Qhga,Qhgj,Qhgm,Qhgu;
-#display Qrgl,Qrge,Qrga,Qrgj,Qrgm,Qrgu;
-#display Qhil,Qhie,Qhia,Qhij,Qhim,Qhiu;
-#display Qril,Qrie,Qria,Qrij,Qrim,Qriu;
-#display Qhjl,Qhje,Qhja,Qhjj,Qhjm,Qhju;
-#display Qrjl,Qrje,Qrja,Qrjj,Qrjm,Qrju;
-#display Qhml,Qhme,Qhma,Qhmj,Qhmm,Qhmu;
-#display Qrml,Qrme,Qrma,Qrmj,Qrmm,Qrmu;
-#display Qhul,Qhue,Qhua,Qhuj,Qhum,Qhuu;
-#display Qrul,Qrue,Qrua,Qruj,Qrum,Qruu;
-
-
-
 #variables
 var Qhbl; #quantity highcal from plant brazil to region latin america
 var Qhbe;
@@ -100,29 +85,20 @@ var Qruu;
 
 #parameters
 
-#exchange rates
-
-param real:= 0.9358025;
-param euro:= 0.952862;
-param rupee:= 1.0548794;
-param yen:= 1.1045637;
-param peso:= 1.0747187;
-param usd:= 1;
-
 #import
-param import_l:=0.3;
+param import_l:=0.30;
 param import_e:=0.03;
 param import_a:=0.27;
 param import_j:=0.06;
 param import_m:=0.35;
-param import_u:=0.4;
+param import_u:=0.04;
 
 #brazil fixed, variable costs
 param br_fc_all := 20000000;
 param br_fc_hc:= 5000000;
 param br_fc_r:= 5000000;
-param br_vc_hc:= 8.7; #raw material+production cost for highcal($/kg)
-param br_vc_r:= 11.2; #raw material+production cost for relax($/kg)
+param br_vc_hc:= 3.6+5.1; #raw material+production cost for highcal($/kg)
+param br_vc_r:= 4.6+6.6; #raw material+production cost for relax($/kg)
 
 #brazil transport costs
 param trans_br_l:= 0.2; #USD/kg
@@ -136,8 +112,8 @@ param trans_br_u:=0.45;
 param ger_fc_all := 45000000;
 param ger_fc_hc:= 13000000;
 param ger_fc_r:= 14000000;
-param ger_vc_hc:= 10.9; #raw material+production cost for highcal($/kg)
-param ger_vc_r:= 13.5; #raw material+production cost for relax($/kg)
+param ger_vc_hc:= 3.9+7; #raw material+production cost for highcal($/kg)
+param ger_vc_r:= 5+8.5; #raw material+production cost for relax($/kg)
 
 #germany transport costs
 param trans_ger_l:= 0.45; #USD/kg
@@ -151,8 +127,8 @@ param trans_ger_u:=0.3;
 param ind_fc_all := 18000000;
 param ind_fc_hc:= 4000000;
 param ind_fc_r:= 4000000;
-param ind_vc_hc:= 8.1; #raw material+production cost for highcal($/kg)
-param ind_vc_r:= 10.5; #raw material+production cost for relax($/kg)
+param ind_vc_hc:= 3.6+4.5; #raw material+production cost for highcal($/kg)
+param ind_vc_r:= 4.5+6; #raw material+production cost for relax($/kg)
 
 #india transport costs
 param trans_ind_l:= 0.5; #USD/kg
@@ -166,8 +142,8 @@ param trans_ind_u:=0.45;
 param jap_fc_all := 17000000;
 param jap_fc_hc:= 6000000;
 param jap_fc_r:= 6000000;
-param jap_vc_hc:= 11.4; #raw material+production cost for highcal($/kg)
-param jap_vc_r:= 14.1; #raw material+production cost for relax($/kg)
+param jap_vc_hc:= 3.9+7.5; #raw material+production cost for highcal($/kg)
+param jap_vc_r:= 5.1+9; #raw material+production cost for relax($/kg)
 
 # japan transport costs
 param trans_jap_l:= 0.5; #USD/kg
@@ -181,8 +157,8 @@ param trans_jap_u:=0.45;
 param mex_fc_all := 30000000;
 param mex_fc_hc:= 6000000;
 param mex_fc_r:= 6000000;
-param mex_vc_hc:= 8.6; #raw material+production cost for highcal($/kg)
-param mex_vc_r:= 11.1; #raw material+production cost for relax($/kg)
+param mex_vc_hc:= 3.6+5; #raw material+production cost for highcal($/kg)
+param mex_vc_r:= 4.6+6.5; #raw material+production cost for relax($/kg)
 
 # mexico transport costs
 param trans_mex_l:= 0.4; #USD/kg
@@ -196,12 +172,12 @@ param trans_mex_u:=0.25;
 param us_fc_all := 21000000;
 param us_fc_hc:= 5000000;
 param us_fc_r:= 5000000;
-param us_vc_hc:= 8.6; #raw material+production cost for highcal($/kg)
-param us_vc_r:= 11.1; #raw material+production cost for relax($/kg)
+param us_vc_hc:= 3.6+5.0; #raw material+production cost for highcal($/kg)
+param us_vc_r:= 4.5+6.5; #raw material+production cost for relax($/kg)
 
 # us transport costs
-param trans_us_l:= 0.45; #USD/kg
-param trans_us_e:= 0.3;
+param trans_us_l:=0.45; #USD/kg
+param trans_us_e:=0.3;
 param trans_us_a:=0.45;
 param trans_us_j:=0.45;
 param trans_us_m:=0.25;
@@ -230,106 +206,109 @@ var U2 binary;
 
 #objective function
 
-
 minimize costs: 
 	
-	(0.8*B0*br_fc_all+0.2*br_fc_all+0.8*B1*br_fc_hc+0.2*br_fc_hc
-		+B1*Qhbl*(trans_br_l+br_vc_hc)*(1)
-		+B1*Qhbe*(trans_br_e+br_vc_hc)*(1+import_e)
-		+B1*Qhba*(trans_br_a+br_vc_hc)*(1+import_a)
-		+B1*Qhbj*(trans_br_j+br_vc_hc)*(1+import_j)
-		+B1*Qhbm*(trans_br_m+br_vc_hc)*(1+import_m)
-		+B1*Qhbu*(trans_br_u+br_vc_hc)*(1+import_u)
+	0.8*B0*br_fc_all+0.2*br_fc_all
+	+0.8*B1*br_fc_hc+0.2*br_fc_hc
+		+Qhbl*(trans_br_l+br_vc_hc)*(1)
+		+Qhbe*(trans_br_e+br_vc_hc)*(1+import_e)
+		+Qhba*(trans_br_a+br_vc_hc)*(1+import_a)
+		+Qhbj*(trans_br_j+br_vc_hc)*(1+import_j)
+		+Qhbm*(trans_br_m+br_vc_hc)*(1+import_m)
+		+Qhbu*(trans_br_u+br_vc_hc)*(1+import_u)
 	
 	+0.8*B2*br_fc_r+0.2*br_fc_r
-		+B2*Qrbl*(trans_br_l+br_vc_r)*(1)
-		+B2*Qrbe*(trans_br_e+br_vc_r)*(1+import_e)
-		+B2*Qrba*(trans_br_a+br_vc_r)*(1+import_a)
-		+B2*Qrbj*(trans_br_j+br_vc_r)*(1+import_j)
-		+B2*Qrbm*(trans_br_m+br_vc_r)*(1+import_m)
-		+B2*Qrbu*(trans_br_u+br_vc_r)*(1+import_u))*0.9358025
+		+Qrbl*(trans_br_l+br_vc_r)*(1)
+		+Qrbe*(trans_br_e+br_vc_r)*(1+import_e)
+		+Qrba*(trans_br_a+br_vc_r)*(1+import_a)
+		+Qrbj*(trans_br_j+br_vc_r)*(1+import_j)
+		+Qrbm*(trans_br_m+br_vc_r)*(1+import_m)
+		+Qrbu*(trans_br_u+br_vc_r)*(1+import_u)
 
-	+(0.8*G0*ger_fc_all+0.2*ger_fc_all+0.8*G1*ger_fc_hc+0.2*ger_fc_hc
-		+G1*Qhgl*(trans_ger_l+ger_vc_hc)*(1+import_l)
-		+G1*Qhge*(trans_ger_e+ger_vc_hc)*(1)
-		+G1*Qhga*(trans_ger_a+ger_vc_hc)*(1+import_a)
-		+G1*Qhgj*(trans_ger_j+ger_vc_hc)*(1+import_j)
-		+G1*Qhgm*(trans_ger_m+ger_vc_hc)*(1+import_m)
-		+G1*Qhgu*(trans_ger_u+ger_vc_hc)*(1+import_u))*0.952862
+	+0.8*G0*ger_fc_all+0.2*ger_fc_all
+	+0.8*G1*ger_fc_hc+0.2*ger_fc_hc
+		+Qhgl*(trans_ger_l+ger_vc_hc)*(1+import_l)
+		+Qhge*(trans_ger_e+ger_vc_hc)*(1)
+		+Qhga*(trans_ger_a+ger_vc_hc)*(1+import_a)
+		+Qhgj*(trans_ger_j+ger_vc_hc)*(1+import_j)
+		+Qhgm*(trans_ger_m+ger_vc_hc)*(1+import_m)
+		+Qhgu*(trans_ger_u+ger_vc_hc)*(1+import_u)
 	
-	+(0.8*G2*ger_fc_r+0.2*ger_fc_r
-		+G2*Qrgl*(trans_ger_l+ger_vc_r)*(1+import_l)
-		+G2*Qrge*(trans_ger_e+ger_vc_r)*(1)
-		+G2*Qrga*(trans_ger_a+ger_vc_r)*(1+import_a)
-		+G2*Qrgj*(trans_ger_j+ger_vc_r)*(1+import_j)
-		+G2*Qrgm*(trans_ger_m+ger_vc_r)*(1+import_m)
-		+G2*Qrgu*(trans_ger_u+ger_vc_r)*(1+import_u))*1.0548794
+	+0.8*G2*ger_fc_r+0.2*ger_fc_r
+		+Qrgl*(trans_ger_l+ger_vc_r)*(1+import_l)
+		+Qrge*(trans_ger_e+ger_vc_r)*(1)
+		+Qrga*(trans_ger_a+ger_vc_r)*(1+import_a)
+		+Qrgj*(trans_ger_j+ger_vc_r)*(1+import_j)
+		+Qrgm*(trans_ger_m+ger_vc_r)*(1+import_m)
+		+Qrgu*(trans_ger_u+ger_vc_r)*(1+import_u)
 
-	+(0.8*I0*ind_fc_all+0.2*ind_fc_all
+	+0.8*I0*ind_fc_all+0.2*ind_fc_all
 	+0.8*I1*ind_fc_hc+0.2*ind_fc_hc
-		+I1*Qhil*(trans_ind_l+ind_vc_hc)*(1+import_l)
-		+I1*Qhie*(trans_ind_e+ind_vc_hc)*(1+import_e)
-		+I1*Qhia*(trans_ind_a+ind_vc_hc)*(1)
-		+I1*Qhij*(trans_ind_j+ind_vc_hc)*(1+import_j)
-		+I1*Qhim*(trans_ind_m+ind_vc_hc)*(1+import_m)
-		+I1*Qhiu*(trans_ind_u+ind_vc_hc)*(1+import_u)
+		+Qhil*(trans_ind_l+ind_vc_hc)*(1+import_l)
+		+Qhie*(trans_ind_e+ind_vc_hc)*(1+import_e)
+		+Qhia*(trans_ind_a+ind_vc_hc)*(1)
+		+Qhij*(trans_ind_j+ind_vc_hc)*(1+import_j)
+		+Qhim*(trans_ind_m+ind_vc_hc)*(1+import_m)
+		+Qhiu*(trans_ind_u+ind_vc_hc)*(1+import_u)
 	
 	+0.8*I2*ind_fc_r+0.2*ind_fc_r
-		+I2*Qril*(trans_ind_l+ind_vc_r)*(1+import_l)
-		+I2*Qrie*(trans_ind_e+ind_vc_r)*(1+import_e)
-		+I2*Qria*(trans_ind_a+ind_vc_r)*(1)
-		+I2*Qrij*(trans_ind_j+ind_vc_r)*(1+import_j)
-		+I2*Qrim*(trans_ind_m+ind_vc_r)*(1+import_m)
-		+I2*Qriu*(trans_ind_u+ind_vc_r)*(1+import_u))*1.0548794
+		+Qril*(trans_ind_l+ind_vc_r)*(1+import_l)
+		+Qrie*(trans_ind_e+ind_vc_r)*(1+import_e)
+		+Qria*(trans_ind_a+ind_vc_r)*(1)
+		+Qrij*(trans_ind_j+ind_vc_r)*(1+import_j)
+		+Qrim*(trans_ind_m+ind_vc_r)*(1+import_m)
+		+Qriu*(trans_ind_u+ind_vc_r)*(1+import_u)
 		
-	+(0.8*J0*jap_fc_all+0.2*jap_fc_all+0.8*J1*jap_fc_hc+0.2*jap_fc_hc
-		+J1*Qhjl*(trans_jap_l+jap_vc_hc)*(1+import_l)
-		+J1*Qhje*(trans_jap_e+jap_vc_hc)*(1+import_e)
-		+J1*Qhja*(trans_jap_a+jap_vc_hc)*(1+import_a)
-		+J1*Qhjj*(trans_jap_j+jap_vc_hc)*(1)
-		+J1*Qhjm*(trans_jap_m+jap_vc_hc)*(1+import_m)
-		+J1*Qhju*(trans_jap_u+jap_vc_hc)*(1+import_u)
+	+0.8*J0*jap_fc_all+0.2*jap_fc_all
+	+0.8*J1*jap_fc_hc+0.2*jap_fc_hc
+		+Qhjl*(trans_jap_l+jap_vc_hc)*(1+import_l)
+		+Qhje*(trans_jap_e+jap_vc_hc)*(1+import_e)
+		+Qhja*(trans_jap_a+jap_vc_hc)*(1+import_a)
+		+Qhjj*(trans_jap_j+jap_vc_hc)*(1)
+		+Qhjm*(trans_jap_m+jap_vc_hc)*(1+import_m)
+		+Qhju*(trans_jap_u+jap_vc_hc)*(1+import_u)
 	
 	+0.8*J2*jap_fc_r+0.2*jap_fc_r
-		+J2*Qrjl*(trans_jap_l+jap_vc_r)*(1+import_l)
-		+J2*Qrje*(trans_jap_e+jap_vc_r)*(1+import_e)
-		+J2*Qrja*(trans_jap_a+jap_vc_r)*(1+import_a)
-		+J2*Qrjj*(trans_jap_j+jap_vc_r)*(1)
-		+J2*Qrjm*(trans_jap_m+jap_vc_r)*(1+import_m)
-		+J2*Qrju*(trans_jap_u+jap_vc_r)*(1+import_u))*1.0747187
+		+Qrjl*(trans_jap_l+jap_vc_r)*(1+import_l)
+		+Qrje*(trans_jap_e+jap_vc_r)*(1+import_e)
+		+Qrja*(trans_jap_a+jap_vc_r)*(1+import_a)
+		+Qrjj*(trans_jap_j+jap_vc_r)*(1)
+		+Qrjm*(trans_jap_m+jap_vc_r)*(1+import_m)
+		+Qrju*(trans_jap_u+jap_vc_r)*(1+import_u)
 
-	+(0.8*M0*mex_fc_all+0.2*mex_fc_all+0.8*M1*mex_fc_hc+0.2*mex_fc_hc
-		+M1*Qhml*(trans_mex_l+mex_vc_hc)*(1+import_l)
-		+M1*Qhme*(trans_mex_e+mex_vc_hc)*(1+import_e)
-		+M1*Qhma*(trans_mex_a+mex_vc_hc)*(1+import_a)
-		+M1*Qhmj*(trans_mex_j+mex_vc_hc)*(1+import_j)
-		+M1*Qhmm*(trans_mex_m+mex_vc_hc)*(1)
-		+M1*Qhmu*(trans_mex_u+mex_vc_hc)*(1+import_u)
+	+0.8*M0*mex_fc_all+0.2*mex_fc_all
+	+0.8*M1*mex_fc_hc+0.2*mex_fc_hc
+		+Qhml*(trans_mex_l+mex_vc_hc)*(1+import_l)
+		+Qhme*(trans_mex_e+mex_vc_hc)*(1+import_e)
+		+Qhma*(trans_mex_a+mex_vc_hc)*(1+import_a)
+		+Qhmj*(trans_mex_j+mex_vc_hc)*(1+import_j)
+		+Qhmm*(trans_mex_m+mex_vc_hc)*(1)
+		+Qhmu*(trans_mex_u+mex_vc_hc)*(1+import_u)
 	
 	+0.8*M2*mex_fc_r+0.2*mex_fc_r
-		+M2*Qrml*(trans_mex_l+mex_vc_r)*(1+import_l)
-		+M2*Qrme*(trans_mex_e+mex_vc_r)*(1+import_e)
-		+M2*Qrma*(trans_mex_a+mex_vc_r)*(1+import_a)
-		+M2*Qrmj*(trans_mex_j+mex_vc_r)*(1+import_j)
-		+M2*Qrmm*(trans_mex_m+mex_vc_r)*(1)
-		+M2*Qrmu*(trans_mex_u+mex_vc_r)*(1+import_u))*1.0747187
+		+Qrml*(trans_mex_l+mex_vc_r)*(1+import_l)
+		+Qrme*(trans_mex_e+mex_vc_r)*(1+import_e)
+		+Qrma*(trans_mex_a+mex_vc_r)*(1+import_a)
+		+Qrmj*(trans_mex_j+mex_vc_r)*(1+import_j)
+		+Qrmm*(trans_mex_m+mex_vc_r)*(1)
+		+Qrmu*(trans_mex_u+mex_vc_r)*(1+import_u)
 		
-	+0.8*U0*us_fc_all+0.2*us_fc_all+0.8*U1*us_fc_hc+0.2*us_fc_hc
-		+U1*Qhul*(trans_us_l+us_vc_hc)*(1+import_l)
-		+U1*Qhue*(trans_us_e+us_vc_hc)*(1+import_e)
-		+U1*Qhua*(trans_us_a+us_vc_hc)*(1+import_a)
-		+U1*Qhuj*(trans_us_j+us_vc_hc)*(1+import_j)
-		+U1*Qhum*(trans_us_m+us_vc_hc)*(1+import_m)
-		+U1*Qhuu*(trans_us_u+us_vc_hc)*(1)
+	+0.8*U0*us_fc_all+0.2*us_fc_all
+	+0.8*U1*us_fc_hc+0.2*us_fc_hc
+		+Qhul*(trans_us_l+us_vc_hc)*(1+import_l)
+		+Qhue*(trans_us_e+us_vc_hc)*(1+import_e)
+		+Qhua*(trans_us_a+us_vc_hc)*(1+import_a)
+		+Qhuj*(trans_us_j+us_vc_hc)*(1+import_j)
+		+Qhum*(trans_us_m+us_vc_hc)*(1+import_m)
+		+Qhuu*(trans_us_u+us_vc_hc)*(1)
 	
 	+0.8*U2*us_fc_r+0.2*us_fc_r
-		+U2*Qrul*(trans_us_l+us_vc_r)*(1+import_l)
-		+U2*Qrue*(trans_us_e+us_vc_r)*(1+import_e)
-		+U2*Qrua*(trans_us_a+us_vc_r)*(1+import_a)
-		+U2*Qruj*(trans_us_j+us_vc_r)*(1+import_j)
-		+U2*Qrum*(trans_us_m+us_vc_r)*(1+import_m)
-		+U2*Qruu*(trans_us_u+us_vc_r)*(1);
-
+		+Qrul*(trans_us_l+us_vc_r)*(1+import_l)
+		+Qrue*(trans_us_e+us_vc_r)*(1+import_e)
+		+Qrua*(trans_us_a+us_vc_r)*(1+import_a)
+		+Qruj*(trans_us_j+us_vc_r)*(1+import_j)
+		+Qrum*(trans_us_m+us_vc_r)*(1+import_m)
+		+Qruu*(trans_us_u+us_vc_r)*(1);
 
 
 #contraints
@@ -341,8 +320,8 @@ subject to e_h_demand: Qhbe+Qhge+Qhie+Qhje+Qhme+Qhue>=15000000;
 subject to e_r_demand: Qrbe+Qrge+Qrie+Qrje+Qrme+Qrue>=12000000;
 subject to a_h_demand: Qhba+Qhga+Qhia+Qhja+Qhma+Qhua>=5000000;
 subject to a_r_demand: Qrba+Qrga+Qria+Qrja+Qrma+Qrua>=3000000;
-subject to j_h_demand: Qhbj+Qhgj+Qhij+Qhjj+Qhmj+Qhuj>=7000000;
-subject to j_r_demand: Qrbj+Qrgj+Qrij+Qrjj+Qrmj+Qruj>=8000000;
+subject to j_h_demand: Qhbj+Qhgj+Qhij+Qhjj+Qhmj+Qhuj>=11300000;
+subject to j_r_demand: Qrbj+Qrgj+Qrij+Qrjj+Qrmj+Qruj>=12900000;
 subject to m_h_demand: Qhbm+Qhgm+Qhim+Qhjm+Qhmm+Qhum>=3000000;
 subject to m_r_demand: Qrbm+Qrgm+Qrim+Qrjm+Qrmm+Qrum>=3000000;
 subject to u_h_demand: Qhbu+Qhgu+Qhiu+Qhju+Qhmu+Qhuu>=18000000;
@@ -364,18 +343,33 @@ subject to us_capacity: Qhul+ Qhue+ Qhua+ Qhuj+ Qhum+ Qhuu+
 
 
 #switch for plants
-subject to brazil0: B0>=B1;
-subject to brazil1: B0>=B2;
-subject to germany0: G0>=G1;
-subject to germany1: G0>=G2;
-subject to india0: I0>=I1;
-subject to india1: I0>=I2;
-subject to japan0: J0>=J1;
-subject to japan1: J0>=J2;
-subject to mexico0: M0>=M1;
-subject to mexico1: M0>=M2;
-subject to us0: U0>=U1;
-subject to us1: U0>=U2;
+subject to brazil1: B0>=B1;
+subject to brazil2: B0>=B2;
+subject to germany1: G0>=G1;
+subject to germany2: G0>=G2;
+subject to india1: I0>=I1;
+subject to india2: I0>=I2;
+subject to japan1: J0>=J1;
+subject to japan2: J0>=J2;
+subject to mexico1: M0>=M1;
+subject to mexico2: M0>=M2;
+subject to us1: U0>=U1;
+subject to us2: U0>=U2;
+
+#switch for production
+subject to brazil_prod1: 500000000*B1>=Qhbl+ Qhbe+ Qhba+ Qhbj+ Qhbm+ Qhbu;
+subject to brazil_prod2: 500000000*B2>=Qrbl+ Qrbe+ Qrba+ Qrbj+ Qrbm+ Qrbu;
+subject to germany_prod1: 500000000*G1>=Qhgl+ Qhge+ Qhga+ Qhgj+ Qhgm+ Qhgu;
+subject to germany_prod2: 500000000*G2>=Qrgl+ Qrge+ Qrga+ Qrgj+ Qrgm+ Qrgu;
+subject to india_prod1: 500000000*I1>=Qhil+ Qhie+ Qhia+ Qhij+ Qhim+ Qhiu;
+subject to india_prod2: 500000000*I2>=Qril + Qrie+ Qria+ Qrij+ Qrim+ Qriu;
+subject to japan_prod1: 500000000*J1>=Qhjl+ Qhje+ Qhja+ Qhjj+ Qhjm+ Qhju;
+subject to japan_prod2: 500000000*J2>=Qrjl + Qrje+ Qrja+ Qrjj+ Qrjm+ Qrju;
+subject to mexico_prod1: 500000000*M1>=Qhml+ Qhme+ Qhma+ Qhmj+ Qhmm+ Qhmu;
+subject to mexico_prod2: 500000000*M2>=Qrml + Qrme+ Qrma+ Qrmj+ Qrmm+ Qrmu;
+subject to us_prod1: 500000000*U1>=Qhul+ Qhue+ Qhua+ Qhuj+ Qhum+ Qhuu;
+subject to us_prod2: 500000000*U2>=Qrul + Qrue+ Qrua+ Qruj+ Qrum+ Qruu;
+
 
 #non-negative quantities constraints
 

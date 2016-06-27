@@ -228,6 +228,7 @@ A decision tree is used to assess the risk of these fluctuations and to calculat
 
 
 ```r
+<<<<<<< Updated upstream
 include_graphics("./Supply Chain Decision Tree/Supply Chain Decision Tree.001.jpeg")
 ```
 
@@ -235,6 +236,16 @@ include_graphics("./Supply Chain Decision Tree/Supply Chain Decision Tree.001.jp
 <img src="./Supply Chain Decision Tree/Supply Chain Decision Tree.001.jpeg" alt="Figure 1: Decision Tree" width="600" height="600" />
 <p class="caption">Figure 1: Decision Tree</p>
 </div>
+=======
+include_graphics("./fxdecisiontree.jpeg")
+```
+
+<div class="figure" style="text-align: center">
+<img src="./fxdecisiontree.jpeg" alt="Figure 1: Exchange Rate Decision Tree" width="800" height="800" />
+<p class="caption">Figure 1: Exchange Rate Decision Tree</p>
+</div>
+
+>>>>>>> Stashed changes
 
 ### Analysis
 

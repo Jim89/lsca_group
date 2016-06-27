@@ -3,8 +3,21 @@ AMPL Script
 #make sure you are in the right directory
 # for jon  cd 'C:\Users\user\Documents\lsca_group\Assignment 2';
 
+q1biopharma.mod
+q2biopharma.mod
+q3capacity.mod
+q4import.mod
+japan5yr2012.mod
+japan5yr2014.mod
+
+
+#first optimisation for optimal network in 2009
+
 model q1biopharma.mod;
+option solver cplex;
 solve;
+
+display costs;
 
 display Qhbl,Qhbe,Qhba,Qhbj,Qhbm,Qhbu;
 display Qrbl,Qrbe,Qrba,Qrbj,Qrbm,Qrbu;
