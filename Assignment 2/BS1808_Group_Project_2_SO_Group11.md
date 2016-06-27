@@ -138,20 +138,26 @@ In restructuring its global supply network structure, BioPharma has to consider 
 2. Limit the capability of some plants to produce only one chemical, where a plant is limited to producing only one chemical 80% of the fixed costs associated with the chemical no longer produced is saved.
 3. Close down some plants, where closing down a plant eliminates all variable costs and saves 80% of annual fixed costs.
 
-Assuming that demand in 2010 is stable and will be the same as in 2009, the first line of the new objective function is as follows:
+Assuming that demand in 2010 is stable and will be the same as in 2009, the cost of the new objective function (for Brazil only) is as follows:
 
-minimise $(0.8B_0+0.2).F_{all,Brazil}+$
-$(0.8B_1+0.2).F_{Brazil,Highcal}+\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).(1 +I_{Brazil,k})$
+Minimise 
+
+$Cost = (0.8B_0+0.2).F_{all,Brazil}$
+$+(0.8B_1+0.2).F_{Brazil,Highcal}+\sum_{k=1}^6 Q_{Highcal,Brazil,k}.(V_{Highcal,Brazil}+T_{Brazil,k}).(1 +I_{Brazil,k})$
 $+(0.8B_2+0.2).F_{Brazil,Relax}+\sum_{k=1}^6 Q_{Relax,Brazil,k}.(V_{Relax,Brazil}+T_{Brazil,k}).( 1 +I_{Brazil,k})$
-$+...$
-where 
+
+$+... costs for 6 other plants$
+
+
+
+where
 
 * $B_0$ is the switch for closing or opening the entire Brazil factory
 * $B_1$ is the switch for controlling the fixed costs for Highcal 
 * $B_2$ is the switch for controlling the fixed costs for Relax 
-* $E_0, E_1, E_2$ are switches for Europe, etc.
+* $E_0, E_1, E_2, I_0, I_1, I_2$ would similarly, be switches for Europe, India etc.. if the obj funct is extended. There are 3x6=18 switches in all.
 
-under the additional conditions of
+and the additional constraints would be:
 
 * $B_0 \geq B_1$, so that no Highcal is produced when the factory is shut
 * $B_0 \geq B_2$, so that no Relax is produced when the factory is shut
@@ -210,7 +216,7 @@ Mexico          Relax               0            0           0       0    3,000,
 US              Highcal             0    1,000,000           0       0   17,000,000            0
 US              Relax               0            0           0       0            0   17,000,000
 
-The new optimised cost after completely shuting down the Japanese plant, cutting Relax facilities in Germany, and Highcal facilities in US is: USD 1,293,383,000. This may possibly be attributed to the high fixed costs and low capacity of 10 million units incurred by the Japanese plant. Unless the high costs are justified by the plant being a technological leader or being able to bring other external benefits in the long term to BioPharma the Japanese plant can be shut and the production can be transferred to other plants. As a result, the Japanese market's demand for Highcal will be fulfilled by Brazil, Germany and India and the market demand for Relax by India. From Figure 6-18 of the question sheet, it is observed that Japan was already importing chemicals from other plants in 2009 - as its total demand of 15mil units of Highcal and Relax exceeds its capacity of 10mil units. Furthermore, the plant was only producing a meagre 2mil units with full operational costs. 
+The new optimised cost after completely shuting down the Japanese plant, cutting Relax facilities in Germany, and Highcal facilities in US is: USD 1,293,383,000, USD 35,931,000 less than the cost without closing down plants. This may possibly be attributed to the high fixed costs and low capacity of 10 million units incurred by the Japanese plant. Unless the high costs are justified by the plant being a technological leader or being able to bring other external benefits in the long term to BioPharma the Japanese plant can be shut and the production can be transferred to other plants. As a result, the Japanese market's demand for Highcal will be fulfilled by Brazil, Germany and India and the market demand for Relax by India. From Figure 6-18 of the question sheet, it is observed that Japan was already importing chemicals from other plants in 2009 - as its total demand of 15mil units of Highcal and Relax exceeds its capacity of 10mil units. Furthermore, the plant was only producing a meagre 2mil units with full operational costs. 
 
 It is suggested that Germany continue to produce only Highcal in the next year, and an extra million kilograms for Japan and million for US. In addition, the USA will only produce Relax, and export that to Europe whilst replacing US made Relax product wiht Mexican Relax. Brazil, Mexico, India, and the US will operate at full capacity with minor changes in the quantities of the chemicals. 
 
@@ -220,7 +226,15 @@ The costs of doing business from a plant can be significantly lower due to weake
 
 A decision tree is used to assess the risk of these fluctuations and to calculate the expected return of each plant. Assuming that the exchange rates in 2010 can fall or rise to any of the rates from 2004 to 2009 with equal probability, the following decision tree with expected costs is constructed: 
 
-(insert picture of decision tree)
+
+```r
+include_graphics("./Supply Chain Decision Tree/Supply Chain Decision Tree.001.jpeg")
+```
+
+<div class="figure" style="text-align: center">
+<img src="./Supply Chain Decision Tree/Supply Chain Decision Tree.001.jpeg" alt="Figure 1: Decision Tree" width="600" height="600" />
+<p class="caption">Figure 1: Decision Tree</p>
+</div>
 
 ### Analysis
 
@@ -234,9 +248,9 @@ Alternatively, these figures for the expected costs for each plant can be reintr
 
 ## The Optimisation Problem
 
-In considering such options, this changes the optimisation by having: 
+In considering such options, this changes the optimisation by adding: 
 
-1. Additional binary variables of AB ($\textbf{A}$dditional capacity for $\textbf{B}$razil),  $AG$,  $AI$,  $AJ$,  $AM$ and  $AU$ to function as switches to allocate capacities for one factory. 
+1. Additional binary variables of AB ($\textbf{A}$dditional capacity for $\textbf{B}$razil),  $AG$,  $AI$,  $AJ$,  $AM$ and  $AU$ to function as switches to allocate a mill kg of capacity for one factory:
 2. Constraint where additional capacity can only be added to one plant: $AB+AG+AI+AJ+AM+AU
 <=1$
 
@@ -282,26 +296,23 @@ Region          Chemical       Brazil      Germany       India   Japan       Mex
 Latin America   Highcal     7,000,000            0           0       0            0            0
 Latin America   Relax       7,000,000            0           0       0            0            0
 Europe          Highcal             0   15,000,000           0       0            0            0
-Europe          Relax       1,000,000            0           0       0   11,000,000            0
+Europe          Relax               0            0           0       0    7,000,000    5,000,000
 Asia            Highcal             0            0   5,000,000       0            0            0
 Asia            Relax               0            0   3,000,000       0            0            0
-Japan           Highcal     3,000,000    2,000,000   2,000,000       0            0            0
+Japan           Highcal     4,000,000            0   3,000,000       0            0            0
 Japan           Relax               0            0   8,000,000       0            0            0
 Mexico          Highcal             0            0           0       0    3,000,000            0
 Mexico          Relax               0            0           0       0    3,000,000            0
-US              Highcal             0            0           0       0   13,000,000    6,000,000
+US              Highcal             0    1,000,000           0       0   17,000,000            0
 US              Relax               0            0           0       0            0   17,000,000
 
-
-Seeing that BioPharma is considering expanding one of its plant's capacity by 1mil kilograms at a cost of $3 million a year, they should expand the US plant. With the new capacity, it will produce an extra 1mil kilograms of Highcal for the domestic market, where Mexico will supply 1mil kilogram less to the US market. The total cost for this plan is $1,334,260,000, which is $3million dollars less than the orginal plan of $1,337,340,000. Hence, BioPharma will experience the greatest economies of scale if the money were invested in the US plant. 
-
-Furthermore, seeing that this move reduces Mexico's production load for 2010, BioPharma will be safer from the changing exchange rates. 
+The greatest savings to cost occurs when the plant expanded is India, with a minimum cost of USD 1,293,309,000. Indian production of Highcal increases by the full  1mill kg units which is set to Japan, replacing the 1 mill Highcal units from Germany to Japan. The previous minimum cost with shutting down of plants was USD 1,293,383,000, hence USD 74K savings occurs from this USD 3mill investment. From the financial side the increase in capacity should not be undertaken.
 
 # Scenario: A reduction of duties
 
 ## Results
 
-Under the assumption that all import tariffs are removed, the new costs for BioPharma will be at USD1,267,200,000, which is more than $50mil less than all the other scenarios above. This further emphasises that import tariffs heavily affects the costs of production and distribution of the chemicals to different regions. 
+Under the assumption that all import tariffs are removed, the new costs for BioPharma will be at USD 1,267,200,000, which is USD 26,183,000 less than a base senario with shutting plants (or USD 62,114,000 less than a senario without shutting plants). This emphasises that import tariffs heavily affects the costs of production and distribution of the chemicals to different regions. 
 
 
 ```r
@@ -353,9 +364,24 @@ Mexico          Relax               0            0           0       0          
 US              Highcal             0            0           0       0   18,000,000            0
 US              Relax               0            0           0       0            0   17,000,000
 
-Without import tariffs, optimal production quantity will depend more heavily on actual costs of production and transportation. We continue to see Germany increasing its production on Highcal only. It is observed that all plants except Brazil specialising in producing one chemical only, and each plant producing for a region outside of its own. Moreover, each country's demand is supplied by fewer plants.
+Without import tariffs, optimal production quantity will depend more heavily on actual costs of production and transportation. Brazil, India, Mexico, and the USA work at full capacity, as they are cheapest to produce in. Further, whilst we see Germany and the US continuing to stick to production of goods in which they have a comparative advantage in  (Germany Highcal, USA Relax); nearly all other plants - with the exception of Brazil - start to specialise in producing one chemical only, and each plant producing for a region outside of its own (i.e. trade). From an Economist's point of view this lowering of tariffs represents a lessening of red tape, and the model of the economy is tending towards an equilibrium where countries specalise in producing goods in which they have a comparitive advantage in (Riccardo), i.e. India and USA in Relax, Mexico and Germny in Highcal. From a more objective point of view, the lowering of tariffs have resulted in more plants being allowed to close down, resulting in more savings of fixed costs.
 
 # Not 100% yield
+Yield (Throughput Yield in this case) is defined as manufacturing output per unit raw material input over a particular time period. A 100% yield would mean a fully efficient manufacturing process. A reduction in yield, say to 90%, would mean that more materials would be required in order to maintain the same output as with 100% yield, hence the raw material and production costs for each chemical at each plant would be divided by 0.9.
+
+Also since product is wasted, we can no longer assume that the production capacity at each plant is the same, the fall in yield also materialises as a reduction in production capacity by multiplying each plant’s capacity by 0.9.
 
 
 # What other factors to be considered when making your recommendations?
+When making the recommendations on production, a number of other factors might also need to be accounted for as they all have some effect on production capacity and demand:
+
+Sales projections: Similar to the projected 10% increase in demand from Asia W/O Japan in the case, the company’s sales team might have uncovered other markets (the rest of the BRIC’s for example), industries, or initiatives by current clients which could signal an increase in demand, and this should normally be taken into account to avoid potential undersupply due to underproduction. It can also indicate potential reduction in demand.
+
+Competition: Increased competition (new entrants or alternative products) could reduce demand and therefore should be accounted for in forecasts. Likewise, the demise of a competitor especially when due to singular reasons, could sign a potential increase in demand from its previous clients.
+
+Relative Inflation/Exchange rates: Inflation could have an effect on where to manufacture and supply to. All else being equal, countries which have a higher level of inflation would ideally be better manufacturing bases as their depreciating currency value would result in their exports becoming cheaper. It would also mean imports would become more costly for them, and would make it preferable to source goods locally and manufacture locally. Likewise, countries with relatively low interest rates would be more beneficial purchasers as they would prefer lower prices from the cheaper countries, possess a more stable currency and be able to pay more for the same goods.
+
+Political turmoil/Natural Disasters: Unprecedented disasters in different countries/locations could adversely affect supply chains, resulting on consequences across the chain. Things like tornadoes, e.t.c. could drastically reduce production capacity, while political turmoil could also result in sanctions, civil wars, and reduce demand in the same way. Biopharma should therefore consider this, either through sourcing from multiple suppliers and/or slowly reducing dependency on potentially unstable countries.
+
+Oil prices: Oil prices are a major component of supply chain costs. Being the major factor in virtually all means of transportation, changing oil prices would have an effect on freight transportation costs for Biopharma and their suppliers, and a possible subsequent effect on demand from oil producing countries.
+
